@@ -60,6 +60,10 @@ namespace _1YearProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            foreach (GameObject go in gameObjects)
+            {
+                go.LoadContent(Content);
+            }
 
             // TODO: use this.Content to load your game content here
         }
@@ -83,6 +87,11 @@ namespace _1YearProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            foreach (GameObject obj in gameObjects)
+            {
+                obj.Update();
+            }
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -94,11 +103,18 @@ namespace _1YearProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            spriteBatch.Begin();
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            foreach (GameObject obj in gameObjects)
+            {
+                obj.Draw(spriteBatch);
+            }
             // TODO: Add your drawing code here
+            spriteBatch.End();
 
             base.Draw(gameTime);
+            
         }
     }
 }
