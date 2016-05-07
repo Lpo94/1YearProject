@@ -1,18 +1,39 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using _1YearProject.Components;
+using System.Collections.Generic;
 
 namespace _1YearProject
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class GameWorld : Game
     {
+        private SpriteRenderer spriteRenderer;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        static GameWorld instance;
+        private List<GameObject> gameObjects = new List<GameObject>();
+        public float deltaTime { get; private set; }
 
-        public Game1()
+        internal static List<Collider> colliders = new List<Collider>();
+
+
+        public static GameWorld Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new GameWorld();
+                }
+                return instance;
+            }
+        }
+
+        private GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
