@@ -38,8 +38,21 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\Animation.cs" />
+    <Compile Include="Components\Animator.cs" />
+    <Compile Include="Components\Collider.cs" />
+    <Compile Include="Components\Component.cs" />
+    <Compile Include="Components\SpriteRenderer.cs" />
+    <Compile Include="Components\Transform.cs" />
     <Compile Include="DB.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="GameObject.cs" />
+    <Compile Include="GameWorld.cs" />
+    <Compile Include="Interfaces\IAnimateable.cs" />
+    <Compile Include="Interfaces\IBuilder.cs" />
+    <Compile Include="Interfaces\ICollisionEnter.cs" />
+    <Compile Include="Interfaces\IDraw.cs" />
+    <Compile Include="Interfaces\ILoad.cs" />
+    <Compile Include="Interfaces\IUpdate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
