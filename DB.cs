@@ -10,6 +10,7 @@ namespace _1YearProject
     {
         int hello;
         string hello2;
+        string hello3;
         string abekat;
     }
 }
