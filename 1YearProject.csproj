@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Builder\Director.cs" />
+    <Compile Include="Builder\TextBoxBuilder.cs" />
     <Compile Include="Components\Animation.cs" />
     <Compile Include="Components\Animator.cs" />
     <Compile Include="Components\Collider.cs" />
@@ -57,7 +58,8 @@
     <Compile Include="Interfaces\IUpdate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestPlayer.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="UI\TextBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -71,6 +73,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\HeroSheet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Textbox.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
