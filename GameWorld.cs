@@ -50,18 +50,13 @@ namespace _1YearProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Director director = new Director(new PlayerBuilder());
-            director.Construct(Vector2.Zero);
 
-            GameObject Player = director.GetGameObject();
-
-            director = new Director(new TextBoxBuilder());
+            Director director = new Director(new TextBoxBuilder());
             director.Construct(new Vector2 (250, 250));
 
             GameObject textBox1 = director.GetGameObject();
 
             gameObjects.Add(textBox1);
-            gameObjects.Add(Player);
 
             base.Initialize();
         }
