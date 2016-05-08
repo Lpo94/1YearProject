@@ -13,6 +13,7 @@ namespace _1YearProject
 {
     class MainMenu : Component, ILoad, IDraw, IUpdate
     {
+        string abekat;
         private static List<GUIElement> main = new List<GUIElement>();
 
         private MainMenu()
