@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using _1YearProject.Components;
 using _1YearProject.Interfaces;
-using _1YearProject;
+using _1YearProject.UI;
 
 namespace _1YearProject
 {
-    class PlayerBuilder : IBuilder
+    class TextBoxBuilder : IBuilder
     {
         private GameObject gameObject = new GameObject();
 
@@ -21,15 +21,12 @@ namespace _1YearProject
 
         public void BuildGameObject(Vector2 position)
         {
-            gameObject.AddComponent(new SpriteRenderer(gameObject, "HeroSheet", 1));
+            gameObject.AddComponent(new SpriteRenderer(gameObject, "Textbox", 1));
 
-            gameObject.AddComponent(new Player(gameObject));
+            gameObject.AddComponent(new TextBox(gameObject));
 
             gameObject.AddComponent(new Animator(gameObject));
 
-            gameObject.AddComponent(new Collider(gameObject));
-
-            
         }
     }
 }

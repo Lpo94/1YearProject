@@ -38,6 +38,7 @@ namespace _1YearProject
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -54,6 +55,12 @@ namespace _1YearProject
 
             GameObject Player = director.GetGameObject();
 
+            director = new Director(new TextBoxBuilder());
+            director.Construct(new Vector2 (250, 250));
+
+            GameObject textBox1 = director.GetGameObject();
+
+            gameObjects.Add(textBox1);
             gameObjects.Add(Player);
 
             base.Initialize();
@@ -67,6 +74,7 @@ namespace _1YearProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
