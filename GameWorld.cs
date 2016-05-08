@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using _1YearProject.Components;
+using _1YearProject.Builder;
 using System.Collections.Generic;
 
 namespace _1YearProject
@@ -48,6 +49,12 @@ namespace _1YearProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            Director director = new Director(new PlayerBuilder());
+            director.Construct(Vector2.Zero);
+
+            GameObject Player = director.GetGameObject();
+
+            gameObjects.Add(Player);
 
             base.Initialize();
         }
