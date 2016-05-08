@@ -49,13 +49,13 @@
     <Compile Include="DB.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
+    <Compile Include="GUI_Element.cs" />
     <Compile Include="Interfaces\IAnimateable.cs" />
     <Compile Include="Interfaces\IBuilder.cs" />
     <Compile Include="Interfaces\ICollisionEnter.cs" />
     <Compile Include="Interfaces\IDraw.cs" />
     <Compile Include="Interfaces\ILoad.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
-    <Compile Include="Builder\PlayerBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Player.cs" />

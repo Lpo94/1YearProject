@@ -23,7 +23,7 @@ namespace _1YearProject
 
         public void LoadContent(ContentManager content)
         {
-            foreach(GUIElement element in main)
+            foreach (GUIElement element in main)
             {
                 element.LoadContent(content);
                 element.CenterElement(600, 800);
@@ -51,7 +51,7 @@ namespace _1YearProject
         {
             if (element == "bla")
             {
-                
+
             }
         }
     }
