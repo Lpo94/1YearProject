@@ -14,12 +14,21 @@ namespace _1YearProject.UI
 {
     class TextBox : Component,IUpdate,IDraw,ILoad
     {
-        private string myText;
+        private Rectangle textBox;
+        private Texture2D debugColor;
+
+        private string myText = "";
         private bool clicked = true;
         private Keys[] currentKeys;
         private SpriteFont font;
         private Transform transform;
         private Animator animator;
+
+        String parsedText;
+        String typedText = "";
+        double typedTextLength;
+        int delayInMilliseconds;
+        bool isDoneDrawing;
 
         public bool Clicked
         {
@@ -35,6 +44,13 @@ namespace _1YearProject.UI
         public void LoadContent(ContentManager content)
         {
             font = content.Load<SpriteFont>("font");
+            textBox = new Rectangle(10, 10, 100, 100);
+            debugColor = content.Load<Texture2D>("Textbox");
+            myText = "Hello World thasdasd asd asdasdas jdasodasklck amskdamkds asd";
+
+            parsedText = parseText(myText);
+            delayInMilliseconds = 50;
+            isDoneDrawing = false;
         }
 
         public void Update()
@@ -47,7 +63,7 @@ namespace _1YearProject.UI
             {
                 foreach (Keys k in currentKeys)
                 {
-                    switch(k)
+                    switch (k)
                     {
                         case Keys.Back:
                             myText = "";
@@ -57,16 +73,56 @@ namespace _1YearProject.UI
                             myText += k;
                             break;
                     }
-                   
+
                 }
             }
+            if (!isDoneDrawing)
+            {
+                if (delayInMilliseconds == 0)
+                {
+                    typedText = parsedText;
+                    isDoneDrawing = true;
+                }
+                else if (typedTextLength < parsedText.Length)
+                {
+                    typedTextLength = typedTextLength + GameWorld.Instance.deltaTime / delayInMilliseconds;
 
-            
+                    if (typedTextLength >= parsedText.Length)
+                    {
+                        typedTextLength = parsedText.Length;
+                        isDoneDrawing = true;
+                    }
+
+                    typedText = parsedText.Substring(0, (int)typedTextLength);
+                }
+
+            }
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, myText, new Vector2(100, 100), Color.Black);
+            spriteBatch.Draw(debugColor, textBox, Color.White);
+            spriteBatch.DrawString(font, typedText, new Vector2(textBox.X, textBox.Y), Color.White);
+
+        }
+
+        private String parseText(String text)
+        {
+            String line = String.Empty;
+            String returnString = String.Empty;
+            String[] wordArray = text.Split(' ');
+
+            foreach (String word in wordArray)
+            {
+                if (font.MeasureString(line + word).Length() > textBox.Width)
+                {
+                    returnString = returnString + line + '\n';
+                    line = String.Empty;
+                }
+
+                line = line + word + ' ';
+            }
+
+            return returnString + line;
         }
     }
 }
