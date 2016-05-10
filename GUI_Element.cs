@@ -10,7 +10,7 @@ using _1YearProject.Interfaces;
 
 namespace _1YearProject
 {
-    public class GUIElement : IDraw, IUpdate, ILoad
+    class GUIElement : IDraw, IUpdate, ILoad
     {
         private Texture2D GUITexture;
         private Rectangle GUIRect;

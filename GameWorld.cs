@@ -10,6 +10,8 @@ namespace _1YearProject
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+    enum GameState { loginScreen, mainMenu, inGame, pause, events, howTo, highscore, create }
+
     public class GameWorld : Game
     {
         private SpriteRenderer spriteRenderer;
@@ -17,6 +19,7 @@ namespace _1YearProject
         SpriteBatch spriteBatch;
         static GameWorld instance;
         private List<GameObject> gameObjects = new List<GameObject>();
+        private List<GameObject> mainMenu = new List<GameObject>();
         public float deltaTime { get; private set; }
 
         internal static List<Collider> colliders = new List<Collider>();
@@ -38,6 +41,8 @@ namespace _1YearProject
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferHeight = 1000;
+            graphics.PreferredBackBufferWidth = 1400;
             IsMouseVisible = true;
         }
 
@@ -51,8 +56,10 @@ namespace _1YearProject
         {
             // TODO: Add your initialization logic here
 
+            GameObject mainMenu = new GameObject();
             Director director = new Director(new TextBoxBuilder());
             director.Construct(new Vector2 (250, 250));
+
 
             GameObject textBox1 = director.GetGameObject();
 
@@ -75,6 +82,7 @@ namespace _1YearProject
                 go.LoadContent(Content);
             }
 
+            MainMenu.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -95,7 +103,6 @@ namespace _1YearProject
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                //Exit();
 
             foreach (GameObject obj in gameObjects)
             {
@@ -103,7 +110,7 @@ namespace _1YearProject
             }
 
             // TODO: Add your update logic here
-
+            MainMenu.Instance.Update();
             base.Update(gameTime);
         }
 
@@ -113,14 +120,18 @@ namespace _1YearProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin();
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
+
+            
 
             foreach (GameObject obj in gameObjects)
             {
                 obj.Draw(spriteBatch);
             }
             // TODO: Add your drawing code here
+
+            MainMenu.Instance.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

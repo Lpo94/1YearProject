@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SQLite;
 
 namespace _1YearProject
 {
     class DB
     {
-        int hello;
-        string hello2;
-        string hello3;
-        string abekat;
+        public void abekat()
+        {
+            SQLiteConnection.CreateFile("1YearProject");
+        }
     }
 }
