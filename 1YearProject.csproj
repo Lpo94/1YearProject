@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Builder\Director.cs" />
+    <Compile Include="Builder\GridBoxBuilder.cs" />
     <Compile Include="Builder\PlayerBuilder.cs" />
     <Compile Include="Builder\TextBoxBuilder.cs" />
     <Compile Include="Components\Animation.cs" />
@@ -50,18 +51,20 @@
     <Compile Include="DB.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
-    <Compile Include="GUI_Element.cs" />
+    <Compile Include="TowerDefense\TowerDefenseGridBox.cs" />
+    <Compile Include="UI\GUI_Element.cs" />
     <Compile Include="Interfaces\IAnimateable.cs" />
     <Compile Include="Interfaces\IBuilder.cs" />
     <Compile Include="Interfaces\ICollisionEnter.cs" />
     <Compile Include="Interfaces\IDraw.cs" />
     <Compile Include="Interfaces\ILoad.cs" />
     <Compile Include="Interfaces\IUpdate.cs" />
-    <Compile Include="KeyboardInput.cs" />
-    <Compile Include="MainMenu.cs" />
+    <Compile Include="UI\KeyboardInput.cs" />
+    <Compile Include="UI\MainMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="TowerDefense\TowerdefenseGrid.cs" />
     <Compile Include="UI\TextBox.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
 using _1YearProject.Components;
 using _1YearProject.Interfaces;
-using _1YearProject.UI;
+using _1YearProject.TowerDefense;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
-namespace _1YearProject
+namespace _1YearProject.Builder
 {
-    class TextBoxBuilder : IBuilder
+    class GridBoxBuilder : IBuilder
     {
         private GameObject gameObject = new GameObject();
 
@@ -22,7 +25,7 @@ namespace _1YearProject
         public void BuildGameObject(Vector2 position)
         {
 
-            gameObject.AddComponent(new TextBox(gameObject, 300,25, position));
+            gameObject.AddComponent(new TowerDefenseGridBox(gameObject,position));
 
 
         }
