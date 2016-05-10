@@ -57,16 +57,16 @@ namespace _1YearProject
             // TODO: Add your initialization logic here
 
             GameObject mainMenu = new GameObject();
-            Director textbox_user = new Director(new TextBoxBuilder());
-            textbox_user.Construct(new Vector2 (545, 335));
+            Director director = new Director(new TextBoxBuilder());
+            director.Construct(new Vector2 (545, 335));
+            GameObject textBox1 = director.GetGameObject();
+            director.Construct(new Vector2(545, 435));
+            GameObject textBox2 = director.GetGameObject();
 
-            GameObject textBox1 = textbox_user.GetGameObject();
 
-            Director textbox_pass = new Director(new TextBoxBuilder());
-            textbox_pass.Construct(new Vector2(545, 435));
 
-            GameObject textBox2 = textbox_pass.GetGameObject();
 
+            
             gameObjects.Add(textBox1);
             gameObjects.Add(textBox2);
 

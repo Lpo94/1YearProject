@@ -10,19 +10,29 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 
-
 namespace _1YearProject.TowerDefense
 {
-    class TowerDefenseGridBox : Component, IDraw, IUpdate, ILoad
+    class NormalTower : Tower,IUpdate,IDraw,ILoad
     {
-        Rectangle rect;
+        float price;
+        float dmg;
+        float range;
+
         Texture2D tex;
         Vector2 pos;
-        bool taken;
+        Rectangle rect;
 
-        public TowerDefenseGridBox(GameObject gameObject,Vector2 pos) : base(gameObject)
+        
+        public NormalTower(GameObject gameObject, string type, float price, float dmg, float range, Vector2 pos): base(gameObject, type, price, dmg, range, pos)
         {
-            this.pos = pos;
+
+
+        }
+
+        public void LoadContent(ContentManager content)
+        {
+            rect = new Rectangle((int)pos.X, (int)pos.Y, 16, 16);
+            tex = content.Load<Texture2D>("pause BG");
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -30,16 +40,9 @@ namespace _1YearProject.TowerDefense
             spriteBatch.Draw(tex, rect, Color.White);
         }
 
-        public void LoadContent(ContentManager content)
-        {
-            tex = content.Load<Texture2D>("Textboxtar");
-            rect = new Rectangle((int)pos.X, (int)pos.Y, 16,16);
-        }
-
-
         public void Update()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
