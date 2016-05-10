@@ -15,20 +15,20 @@ namespace _1YearProject.UI
     class TextBox : Component,IUpdate,IDraw,ILoad
     {
         private Rectangle textBox;
-        private Texture2D debugColor;
+        private Texture2D notClickedTex;
+        private Texture2D clickedTex;
+
 
         private string myText = "";
         private bool clicked = true;
-        private Keys[] currentKeys;
         private SpriteFont font;
-        private Transform transform;
-        private Animator animator;
+        private List<string> myTextList;
+        private float delay = 200;
+        float timer = GameWorld.Instance.deltaTime;
 
-        String parsedText;
-        String typedText = "";
-        double typedTextLength;
-        int delayInMilliseconds;
-        bool isDoneDrawing;
+        float height;
+        float length;
+        Vector2 pos;
 
         public bool Clicked
         {
@@ -36,93 +36,94 @@ namespace _1YearProject.UI
             set { clicked = value; }
         }
 
-        public TextBox(GameObject gameObject) : base(gameObject)
+        public TextBox(GameObject gameObject, float length, float height, Vector2 pos) : base(gameObject)
         {
-            this.animator = (Animator)GameObject.GetComponent("Animator");
+            this.length = length;
+            this.height = height;
+            this.pos = pos;
         }
 
         public void LoadContent(ContentManager content)
         {
             font = content.Load<SpriteFont>("font");
-            textBox = new Rectangle(10, 10, 100, 100);
-            debugColor = content.Load<Texture2D>("Textbox");
-            myText = "Hello World thasdasd asd asdasdas jdasodasklck amskdamkds asd";
+            textBox = new Rectangle((int)pos.X, (int)pos.Y, (int)length, (int)height);
+            notClickedTex = content.Load<Texture2D>("Textbox");
+            clickedTex = content.Load<Texture2D>("Textboxtar");
+            myTextList = new List<string>();
 
-            parsedText = parseText(myText);
-            delayInMilliseconds = 50;
-            isDoneDrawing = false;
         }
 
         public void Update()
         {
-            KeyboardState keyState = Keyboard.GetState();
-            currentKeys = keyState.GetPressedKeys();
-
-
-            if (clicked == true)
+            if (textBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                foreach (Keys k in currentKeys)
-                {
-                    switch (k)
-                    {
-                        case Keys.Back:
-                            myText = "";
-                            break;
-
-                        default:
-                            myText += k;
-                            break;
-                    }
-
-                }
+                clicked = true;
             }
-            if (!isDoneDrawing)
+            else if(!textBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed) { clicked = false; }
+
+            var timer = (float)GameWorld.Instance.deltaTime;
+
+            if (delay > 0)
             {
-                if (delayInMilliseconds == 0)
-                {
-                    typedText = parsedText;
-                    isDoneDrawing = true;
-                }
-                else if (typedTextLength < parsedText.Length)
-                {
-                    typedTextLength = typedTextLength + GameWorld.Instance.deltaTime / delayInMilliseconds;
+                delay -= timer;
+            }           
 
-                    if (typedTextLength >= parsedText.Length)
-                    {
-                        typedTextLength = parsedText.Length;
-                        isDoneDrawing = true;
-                    }
-
-                    typedText = parsedText.Substring(0, (int)typedTextLength);
-                }
-
+            if (clicked == true && delay < 0 && myText.Length < 19)
+            {
+                AddToString();
+                
             }
+
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(debugColor, textBox, Color.White);
-            spriteBatch.DrawString(font, typedText, new Vector2(textBox.X, textBox.Y), Color.White);
+            if(clicked == false)
+            {
+                spriteBatch.Draw(notClickedTex, textBox, Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(clickedTex, textBox, Color.White);
+            }
+            spriteBatch.DrawString(font, myText, new Vector2(textBox.X+10, textBox.Y+5), Color.Black);
 
         }
 
-        private String parseText(String text)
+        private void AddToString()
         {
-            String line = String.Empty;
-            String returnString = String.Empty;
-            String[] wordArray = text.Split(' ');
+            string h = KeyboardInput.Instance.Input();
 
-            foreach (String word in wordArray)
+
+            if (h != null)
             {
-                if (font.MeasureString(line + word).Length() > textBox.Width)
+                switch (h.ToLower())
                 {
-                    returnString = returnString + line + '\n';
-                    line = String.Empty;
-                }
+                    case "backspace":
+                        if (myText.Length - 1 != null)
+                        {
+                            myText = myText.Remove(myText.Length - 1);
+                            delay = 200;
+                        }
+                        break;
+                    case "enter":
+                        clicked = false;
+                        break;
+                    case "":
+                        break;
 
-                line = line + word + ' ';
+                    case " ":
+                        break;
+                    default:
+                        myText += h;
+                        delay = 200;
+                        break;
+                }
             }
 
-            return returnString + line;
+            h = "";
+            
+
         }
     }
 }

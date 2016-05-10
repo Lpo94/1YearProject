@@ -104,10 +104,9 @@ namespace _1YearProject
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-
             }
-            //Exit();
-            deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
+                //Exit();
+                deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
             foreach (GameObject obj in gameObjects)
             {
                 obj.Update();
