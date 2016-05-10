@@ -50,6 +50,7 @@ namespace _1YearProject.Components
         {
             this.spriteName = spriteName;
             this.layerDepth = layerDepth;
+            this.transform = gameObject.GetTransform;
         }
 
         public void Update()

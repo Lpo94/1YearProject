@@ -62,11 +62,14 @@ namespace _1YearProject
             GameObject textBox1 = director.GetGameObject();
             director.Construct(new Vector2(545, 435));
             GameObject textBox2 = director.GetGameObject();
+            director = new Director(new TowerIconBuilder());
+            director.Construct(new Vector2(100, 100));
+            GameObject icon = director.GetGameObject();
 
 
 
 
-            
+            gameObjects.Add(icon);
             gameObjects.Add(textBox1);
             gameObjects.Add(textBox2);
 

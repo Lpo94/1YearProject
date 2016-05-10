@@ -16,6 +16,7 @@ namespace _1YearProject
         private Transform transform;
         private List<Component> components;
         private bool isloaded = false;
+        private Vector2 pos;
 
         public Transform GetTransform
         {
@@ -31,7 +32,8 @@ namespace _1YearProject
         public GameObject()
         {
             components = new List<Component>();
-            this.transform = new Transform(this, Vector2.Zero);
+            transform = GetTransform;
+            this.transform = new Transform(this, pos);
 
         }
 

@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject.TowerDefense
 {
-    class TowerIcon : Component, IDraw,ILoad,IUpdate
+    class TowerIcon : Component, IUpdate,ILoad,IDraw
     {
         Texture2D tex;
         Vector2 pos;
@@ -23,10 +23,6 @@ namespace _1YearProject.TowerDefense
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            
-        }
 
         public void LoadContent(ContentManager content)
         {
@@ -34,6 +30,11 @@ namespace _1YearProject.TowerDefense
         }
 
         public void Update()
+        {
+            
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
         {
             
         }

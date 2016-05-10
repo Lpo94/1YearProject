@@ -17,7 +17,7 @@ namespace _1YearProject.UI
         private Rectangle textBox;
         private Texture2D notClickedTex;
         private Texture2D clickedTex;
-        private SpriteRenderer spriteRenderer;
+
 
 
         private string myText = "";

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using _1YearProject.Components;
 using _1YearProject.Interfaces;
-using _1YearProject.UI;
+using _1YearProject.TowerDefense;
 
-namespace _1YearProject
+
+namespace _1YearProject.Builder
 {
-    class TextBoxBuilder : IBuilder
+    class TowerIconBuilder : IBuilder
     {
-        private GameObject gameObject = new GameObject();
+       private GameObject gameObject = new GameObject();
 
         public GameObject GetResult()
         {
@@ -21,8 +22,9 @@ namespace _1YearProject
 
         public void BuildGameObject(Vector2 position)
         {
-
-            gameObject.AddComponent(new TextBox(gameObject, 300,25, position));
+            gameObject.AddComponent(new Transform(gameObject, position));
+            gameObject.AddComponent(new SpriteRenderer(gameObject, "Textbox", 1));
+            gameObject.AddComponent(new TowerIcon(gameObject));
 
 
         }
