@@ -17,13 +17,14 @@ namespace _1YearProject.UI
         private Rectangle textBox;
         private Texture2D notClickedTex;
         private Texture2D clickedTex;
+        private SpriteRenderer spriteRenderer;
 
 
         private string myText = "";
         private bool clicked;
         private SpriteFont font;
         private List<string> myTextList;
-        private float delay = 200;
+        private float delay = 500;
         float timer = GameWorld.Instance.deltaTime;
 
         float height;
@@ -102,7 +103,7 @@ namespace _1YearProject.UI
                         if (myText.Length - 1 >= 0)
                         {
                             myText = myText.Remove(myText.Length - 1);
-                            delay = 200;
+                            delay = 500;
                         }
                         break;
                     case "enter":
@@ -117,7 +118,7 @@ namespace _1YearProject.UI
                         if (myText.Length < 19)
                         {
                             myText += h;
-                            delay = 200;
+                            delay = 500;
                         }
                         break;
                 }
