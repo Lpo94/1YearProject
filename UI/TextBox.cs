@@ -71,7 +71,6 @@ namespace _1YearProject.UI
             if (clicked == true && delay < 0 && myText.Length < 19)
             {
                 AddToString();
-                
             }
 
 
