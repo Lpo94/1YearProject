@@ -82,10 +82,10 @@ namespace _1YearProject
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            foreach (GameObject go in gameObjects)
+                foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
-            }
+        }
 
             MainMenu.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
@@ -110,6 +110,20 @@ namespace _1YearProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
             }
+
+            switch(MainMenu._GameState)
+            {
+                case GameState.loginScreen:
+                    foreach (GameObject obj in gameObjects)
+                    {
+                        obj.Update();
+                    }
+                    break;
+
+                default:
+                    break;
+
+            }
                 //Exit();
                 deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
             foreach (GameObject obj in gameObjects)
@@ -131,15 +145,21 @@ namespace _1YearProject
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
 
-            
-
-            foreach (GameObject obj in gameObjects)
+            switch (MainMenu._GameState)
             {
-                obj.Draw(spriteBatch);
-            }
-            // TODO: Add your drawing code here
+                case GameState.loginScreen:
+                    foreach (GameObject obj in gameObjects)
+                    {
+                        obj.Draw(spriteBatch);
+                    }
+                    break;
 
-            MainMenu.Instance.Draw(spriteBatch);
+                default:
+                    break;
+            }
+                    // TODO: Add your drawing code here
+
+                    MainMenu.Instance.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
