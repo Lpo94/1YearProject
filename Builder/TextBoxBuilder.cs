@@ -23,9 +23,8 @@ namespace _1YearProject
         {
             gameObject.AddComponent(new SpriteRenderer(gameObject, "Textbox", 1));
 
-            gameObject.AddComponent(new TextBox(gameObject));
+            gameObject.AddComponent(new TextBox(gameObject, 300,25, position));
 
-            gameObject.AddComponent(new Animator(gameObject));
 
         }
     }
