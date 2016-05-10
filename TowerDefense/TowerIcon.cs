@@ -18,10 +18,11 @@ namespace _1YearProject.TowerDefense
 
         private Collider collider;
         private Animator animator;
+        private Transform transform;
 
         public TowerIcon(GameObject gameObject) : base(gameObject)
         {
-            
+
         }
 
 

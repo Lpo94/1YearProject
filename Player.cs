@@ -73,7 +73,12 @@ namespace _1YearProject
         public void OnCollisionEnter(Collider other)
         {
             spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
-            spriteRenderer.Color = Color.Red;
+            spriteRenderer.Color = Color.Blue;
+        }
+
+        public void OnCollisionExit(Collider other)
+        {
+            spriteRenderer.Color = Color.White;
         }
 
 

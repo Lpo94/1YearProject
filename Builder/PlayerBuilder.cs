@@ -22,7 +22,7 @@ namespace _1YearProject.Builder
         public void BuildGameObject(Vector2 position)
         {
 
-            gameObject.AddComponent(new SpriteRenderer(gameObject, "HeroSheet", 1));
+            gameObject.AddComponent(new SpriteRenderer(gameObject, "HeroSheet", 1, position));
 
             gameObject.AddComponent(new Player(gameObject));
 

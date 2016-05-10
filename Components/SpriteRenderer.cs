@@ -51,25 +51,21 @@ namespace _1YearProject.Components
         {
             this.spriteName = spriteName;
             this.layerDepth = layerDepth;
-            this.pos = pos;
-            this.transform = (Transform)gameObject.GetComponent("transform");
         }
 
         public void Update()
         {
-
+            
         }
 
         public void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>(spriteName);
-            
-
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, pos, rectangle, color, 0, Vector2.Zero, 1, SpriteEffects.None, layerDepth);
+            spriteBatch.Draw(sprite, gameObject.GetTransform.Position, rectangle, color, 0, Vector2.Zero, 1, SpriteEffects.None, layerDepth);
         }
     }
 }
