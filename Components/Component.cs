@@ -8,7 +8,7 @@ namespace _1YearProject.Components
 {
     abstract class Component
     {
-        public GameObject GameObject { get; private set; }
+        public GameObject gameObject { get; private set; }
 
         public Component()
         {
@@ -17,7 +17,7 @@ namespace _1YearProject.Components
 
         public Component(GameObject gameObject)
         {
-            GameObject = gameObject;
+            this.gameObject = gameObject;
         }
 
 

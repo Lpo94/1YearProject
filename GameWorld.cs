@@ -62,15 +62,13 @@ namespace _1YearProject
             GameObject textBox1 = director.GetGameObject();
             director.Construct(new Vector2(545, 435));
             GameObject textBox2 = director.GetGameObject();
-            director = new Director(new PlayerBuilder());
-            director.Construct(new Vector2(400, 400));
-            GameObject player = director.GetGameObject();
+            director.Construct(new Vector2(100, 100));
+            GameObject icon = director.GetGameObject();
 
 
 
 
 
-            inGame.Add(player);
             gameObjects.Add(textBox1);
             gameObjects.Add(textBox2);
 
@@ -89,7 +87,7 @@ namespace _1YearProject
                 foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
-            }
+        }
             foreach (GameObject go in inGame)
             {
                 go.LoadContent(Content);
