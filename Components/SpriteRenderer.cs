@@ -18,6 +18,7 @@ namespace _1YearProject.Components
         private float layerDepth;
         private SpriteEffects effects;
         private Vector2 offset;
+        private Vector2 pos;
         private Transform transform;
         private Color color = Color.White;
 
@@ -46,11 +47,12 @@ namespace _1YearProject.Components
         }
 
 
-        public SpriteRenderer(GameObject gameObject, string spriteName, float layerDepth) : base(gameObject)
+        public SpriteRenderer(GameObject gameObject, string spriteName, float layerDepth,Vector2 pos) : base(gameObject)
         {
             this.spriteName = spriteName;
             this.layerDepth = layerDepth;
-            this.transform = gameObject.GetTransform;
+            this.pos = pos;
+            this.transform = (Transform)gameObject.GetComponent("transform");
         }
 
         public void Update()
@@ -61,11 +63,13 @@ namespace _1YearProject.Components
         public void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>(spriteName);
+            
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, GameObject.GetTransform.position, rectangle, color, 0, Vector2.Zero, 1, SpriteEffects.None, layerDepth);
+            spriteBatch.Draw(sprite, pos, rectangle, color, 0, Vector2.Zero, 1, SpriteEffects.None, layerDepth);
         }
     }
 }

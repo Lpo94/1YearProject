@@ -9,16 +9,16 @@ namespace _1YearProject.Components
 {
     class Transform : Component
     {
-        public Vector2 position { get; set; }
+        public Vector2 Position { get; set; }
 
         public Transform(GameObject gameObject, Vector2 position) : base(gameObject)
         {
-            this.position = position;
+            this.Position = position;
         }
 
         public void Translate(Vector2 translation)
         {
-            position += translation;
+            Position += translation;
         }
     }
 }

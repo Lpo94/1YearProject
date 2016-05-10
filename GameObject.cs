@@ -16,7 +16,7 @@ namespace _1YearProject
         private Transform transform;
         private List<Component> components;
         private bool isloaded = false;
-        private Vector2 pos;
+
 
         public Transform GetTransform
         {
@@ -33,7 +33,7 @@ namespace _1YearProject
         {
             components = new List<Component>();
             transform = GetTransform;
-            this.transform = new Transform(this, pos);
+            this.transform = new Transform(this, Vector2.Zero);
 
         }
 

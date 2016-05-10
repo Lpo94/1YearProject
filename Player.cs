@@ -26,7 +26,7 @@ namespace _1YearProject
 
         public void LoadContent(ContentManager content)
         {
-            this.animator = (Animator)GameObject.GetComponent("Animator");
+            this.animator = (Animator)gameObject.GetComponent("Animator");
             
             CreateAnimations();
             animator.PlayAnimation("IdleBack");
@@ -75,7 +75,7 @@ namespace _1YearProject
 
         public void OnCollisionEnter(Collider other)
         {
-            spriteRenderer = (SpriteRenderer)GameObject.GetComponent("SpriteRenderer");
+            spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
             spriteRenderer.Color = Color.Red;
         }
 
@@ -116,7 +116,7 @@ namespace _1YearProject
             }
 
 
-            GameObject.GetTransform.Translate(translation*speed*GameWorld.Instance.deltaTime);
+            gameObject.GetTransform.Translate(translation*speed*GameWorld.Instance.deltaTime);
         }
     }
 

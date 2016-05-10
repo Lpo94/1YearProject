@@ -42,8 +42,8 @@ namespace _1YearProject.Components
             {
                 return new Rectangle
                     (
-                    (int)(GameObject.GetTransform.position.X + spriteRenderer.Offset.X),
-                    (int)(GameObject.GetTransform.position.Y + spriteRenderer.Offset.Y),
+                    (int)(gameObject.GetTransform.Position.X + spriteRenderer.Offset.X),
+                    (int)(gameObject.GetTransform.Position.Y + spriteRenderer.Offset.Y),
                     spriteRenderer.Rectangle.Width,
                     spriteRenderer.Rectangle.Height
                     );
@@ -52,7 +52,7 @@ namespace _1YearProject.Components
 
         public void LoadContent(ContentManager content)
         {
-            spriteRenderer = (SpriteRenderer)GameObject.GetComponent("SpriteRenderer");
+            spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
 
             texture2D = content.Load<Texture2D>("CollisionTexture");
         }
@@ -85,7 +85,7 @@ namespace _1YearProject.Components
                         if (CollisionBox.Intersects(other.CollisionBox))
                         {
 
-                            GameObject.OnCollisionEnter(other);
+                            gameObject.OnCollisionEnter(other);
                             otherColliders.Add(other);
 
                         }

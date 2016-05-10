@@ -23,8 +23,10 @@ namespace _1YearProject.Builder
         public void BuildGameObject(Vector2 position)
         {
             gameObject.AddComponent(new Transform(gameObject, position));
-            gameObject.AddComponent(new SpriteRenderer(gameObject, "Textbox", 1));
+            gameObject.AddComponent(new SpriteRenderer(gameObject, "Textbox", 1,position));
             gameObject.AddComponent(new TowerIcon(gameObject));
+            gameObject.AddComponent(new Animator(gameObject));
+            gameObject.AddComponent(new Collider(gameObject));
 
 
         }

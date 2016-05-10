@@ -35,7 +35,7 @@ namespace _1YearProject.Components
 
             if (currentIndex > rectangles.Length - 1)
             {
-                GameObject.OnAnimationDone(animationName);
+                gameObject.OnAnimationDone(animationName);
                 timeElapsed = 0;
                 currentIndex = 0;
             }
