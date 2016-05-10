@@ -111,6 +111,11 @@ namespace _1YearProject
             {
             }
 
+            if(Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.inGame)
+            {
+                MainMenu._GameState = GameState.pause;
+            }
+
             switch(MainMenu._GameState)
             {
                 case GameState.loginScreen:

@@ -107,6 +107,9 @@
     <Content Include="Content\how to.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\ingame BG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\leave game.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -56,6 +56,8 @@ namespace _1YearProject
             main.Add(new GUIElement("logout"));
             main.Add(new GUIElement("exit"));
 
+            inGame.Add(new GUIElement("ingame BG"));
+
             pause.Add(new GUIElement("pause BG"));
             pause.Add(new GUIElement("continue"));
             pause.Add(new GUIElement("save"));
@@ -83,11 +85,18 @@ namespace _1YearProject
                 element.clickEvent += OnClick;
             }
             main.Find(x => x.AssetName == "new game").MoveElement(0, -200);
-            main.Find(x => x.AssetName == "load game").MoveElement(0, -100);
-            main.Find(x => x.AssetName == "how to").MoveElement(0, 0);
-            main.Find(x => x.AssetName == "highscore").MoveElement(0, 100);
-            main.Find(x => x.AssetName == "logout").MoveElement(0, 200);
-            main.Find(x => x.AssetName == "exit").MoveElement(0, 300);
+            main.Find(x => x.AssetName == "load game").MoveElement(0, -115);
+            main.Find(x => x.AssetName == "how to").MoveElement(0, -30);
+            main.Find(x => x.AssetName == "highscore").MoveElement(0, 55);
+            main.Find(x => x.AssetName == "logout").MoveElement(0, 140);
+            main.Find(x => x.AssetName == "exit").MoveElement(0, 225);
+
+            foreach (GUIElement element in inGame)
+            {
+                element.LoadContent(content);
+                element.CenterElement(1000, 1400);
+                element.clickEvent += OnClick;
+            }
 
             foreach (GUIElement element in pause)
             {
@@ -118,6 +127,13 @@ namespace _1YearProject
                     }
                     break;
 
+                case GameState.inGame:
+                    foreach (GUIElement element in inGame)
+                    {
+                        element.Update();
+                    }
+                    break;
+
                 case GameState.pause:
                     foreach (GUIElement element in pause)
                     {
@@ -143,6 +159,13 @@ namespace _1YearProject
 
                 case GameState.mainMenu:
                     foreach (GUIElement element in main)
+                    {
+                        element.Draw(spritebatch);
+                    }
+                    break;
+
+                case GameState.inGame:
+                    foreach (GUIElement element in inGame)
                     {
                         element.Draw(spritebatch);
                     }
