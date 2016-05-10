@@ -51,7 +51,7 @@ namespace _1YearProject.Components
         {
             this.spriteName = spriteName;
             this.layerDepth = layerDepth;
-            this.pos = pos;
+            
             this.transform = (Transform)gameObject.GetComponent("transform");
         }
 
@@ -69,7 +69,7 @@ namespace _1YearProject.Components
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, pos, rectangle, color, 0, Vector2.Zero, 1, SpriteEffects.None, layerDepth);
+            spriteBatch.Draw(sprite, gameObject.GetTransform.Position, rectangle, color, 0, Vector2.Zero, 1, SpriteEffects.None, layerDepth);
         }
     }
 }

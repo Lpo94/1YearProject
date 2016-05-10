@@ -106,14 +106,17 @@ namespace _1YearProject.UI
                             delay = 500;
                         }
                         break;
+
                     case "enter":
                         clicked = false;
                         break;
+
                     case "":
                         break;
 
                     case " ":
                         break;
+
                     default:
                         if (myText.Length < 19)
                         {
