@@ -123,6 +123,9 @@
     <Content Include="Content\logout.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\mid player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\new game.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
