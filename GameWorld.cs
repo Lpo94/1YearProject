@@ -19,7 +19,7 @@ namespace _1YearProject
         SpriteBatch spriteBatch;
         static GameWorld instance;
         private List<GameObject> gameObjects = new List<GameObject>();
-        private List<GameObject> mainMenu = new List<GameObject>();
+        private List<GameObject> inGame = new List<GameObject>();
         public float deltaTime { get; private set; }
 
         internal static List<Collider> colliders = new List<Collider>();
@@ -56,7 +56,7 @@ namespace _1YearProject
         {
             // TODO: Add your initialization logic here
 
-            GameObject mainMenu = new GameObject();
+            
             Director director = new Director(new TextBoxBuilder());
             director.Construct(new Vector2 (545, 335));
             GameObject textBox1 = director.GetGameObject();
@@ -65,10 +65,13 @@ namespace _1YearProject
             director = new Director(new TowerIconBuilder());
             director.Construct(new Vector2(100, 100));
             GameObject icon = director.GetGameObject();
+            director = new Director(new PlayerBuilder());
+            director.Construct(new Vector2(400, 400));
+            GameObject player = director.GetGameObject();
 
 
 
-
+            inGame.Add(player);
             gameObjects.Add(icon);
             gameObjects.Add(textBox1);
             gameObjects.Add(textBox2);
@@ -89,6 +92,10 @@ namespace _1YearProject
             {
                 go.LoadContent(Content);
         }
+            foreach (GameObject go in inGame)
+            {
+                go.LoadContent(Content);
+            }
 
             MainMenu.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
@@ -128,16 +135,18 @@ namespace _1YearProject
                     }
                     break;
 
+                case GameState.inGame:
+                    foreach (GameObject obj in inGame)
+                    {
+                        obj.Update();
+                    }
+                    break;
                 default:
                     break;
 
             }
                 //Exit();
                 deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
-            foreach (GameObject obj in gameObjects)
-            {
-                obj.Update();
-            }
 
             // TODO: Add your update logic here
             MainMenu.Instance.Update();
@@ -157,6 +166,12 @@ namespace _1YearProject
             {
                 case GameState.loginScreen:
                     foreach (GameObject obj in gameObjects)
+                    {
+                        obj.Draw(spriteBatch);
+                    }
+                    break;
+                case GameState.inGame:
+                    foreach (GameObject obj in inGame)
                     {
                         obj.Draw(spriteBatch);
                     }

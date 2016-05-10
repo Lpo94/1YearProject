@@ -16,7 +16,7 @@ namespace _1YearProject
     class Player : Component, IUpdate, ILoad, ICollisionEnter
     {
         private SpriteRenderer spriteRenderer;
-        private float speed = 100;
+        private float speed = 0.5f;
         private Animator animator;
         private Transform transform;
         private DIRECTION direction;
@@ -67,16 +67,18 @@ namespace _1YearProject
 
             Move();
 
-
-
-
-            
         }
+
 
         public void OnCollisionEnter(Collider other)
         {
             spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
-            spriteRenderer.Color = Color.Red;
+            spriteRenderer.Color = Color.Blue;
+        }
+
+        public void OnCollisionExit(Collider other)
+        {
+            spriteRenderer.Color = Color.White;
         }
 
 
@@ -106,7 +108,7 @@ namespace _1YearProject
 
            else if (keyState.IsKeyDown(Keys.S) || keyState.IsKeyDown(Keys.Down))
             {
-                translation += new Vector2(0, 5);
+                translation += new Vector2(0, 1);
                 animator.PlayAnimation("WalkFront");
             }
 

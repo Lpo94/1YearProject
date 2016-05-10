@@ -52,7 +52,6 @@ namespace _1YearProject.Components
             this.spriteName = spriteName;
             this.layerDepth = layerDepth;
             
-            this.transform = (Transform)gameObject.GetComponent("transform");
         }
 
         public void Update()
@@ -63,8 +62,6 @@ namespace _1YearProject.Components
         public void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>(spriteName);
-            
-
         }
 
         public void Draw(SpriteBatch spriteBatch)
