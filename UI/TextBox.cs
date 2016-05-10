@@ -20,7 +20,7 @@ namespace _1YearProject.UI
 
 
         private string myText = "";
-        private bool clicked = true;
+        private bool clicked;
         private SpriteFont font;
         private List<string> myTextList;
         private float delay = 200;
@@ -68,7 +68,7 @@ namespace _1YearProject.UI
                 delay -= timer;
             }           
 
-            if (clicked == true && delay < 0 && myText.Length < 19)
+            if (clicked == true && delay < 0)
             {
                 AddToString();
             }
@@ -99,7 +99,7 @@ namespace _1YearProject.UI
                 switch (h.ToLower())
                 {
                     case "backspace":
-                        if (myText.Length - 1 != null)
+                        if (myText.Length - 1 >= 0)
                         {
                             myText = myText.Remove(myText.Length - 1);
                             delay = 200;
@@ -114,8 +114,11 @@ namespace _1YearProject.UI
                     case " ":
                         break;
                     default:
-                        myText += h;
-                        delay = 200;
+                        if (myText.Length < 19)
+                        {
+                            myText += h;
+                            delay = 200;
+                        }
                         break;
                 }
             }
