@@ -39,7 +39,7 @@ namespace _1YearProject.TowerDefense
             {
                 
                 GameLogic.Instance.TowerIconClicked = true;
-                GameWorld.Instance.Exit();
+                
             }
         }
 
