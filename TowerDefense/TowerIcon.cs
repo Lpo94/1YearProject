@@ -22,7 +22,7 @@ namespace _1YearProject.TowerDefense
 
         public TowerIcon(GameObject gameObject) : base(gameObject)
         {
-
+            
         }
 
 
@@ -37,7 +37,7 @@ namespace _1YearProject.TowerDefense
         {
             if (collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                
+               
                 GameLogic.Instance.TowerIconClicked = true;
                 
             }

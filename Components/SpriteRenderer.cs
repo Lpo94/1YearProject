@@ -51,11 +51,13 @@ namespace _1YearProject.Components
         {
             this.spriteName = spriteName;
             this.layerDepth = layerDepth;
+            
+            this.transform = (Transform)gameObject.GetComponent("transform");
         }
 
         public void Update()
         {
-            
+
         }
 
         public void LoadContent(ContentManager content)
