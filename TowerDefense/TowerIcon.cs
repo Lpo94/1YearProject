@@ -15,14 +15,15 @@ namespace _1YearProject.TowerDefense
 {
     class TowerIcon : Component, IUpdate,ILoad,IDraw
     {
-
+        private Transform transform;
         private Collider collider;
         private Animator animator;
-        private Transform transform;
 
-        public TowerIcon(GameObject gameObject) : base(gameObject)
+
+        public TowerIcon(GameObject gameObject, Vector2 pos) : base(gameObject)
         {
-            
+            this.transform = gameObject.GetTransform;
+            transform.Position = pos;
         }
 
 
@@ -37,9 +38,9 @@ namespace _1YearProject.TowerDefense
         {
             if (collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-               
-                GameLogic.Instance.TowerIconClicked = true;
                 
+                GameLogic.Instance.TowerIconClicked = true;
+
             }
         }
 
