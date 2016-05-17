@@ -14,26 +14,30 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject.TowerDefense
 {
-    abstract class Tower : Component,IUpdate,ILoad
+    abstract class Tower : Component, IUpdate, ILoad
     {
-        float range;
-        float dmg;
+
+        
         Vector2 pos;
         Texture2D tex;
         Rectangle rect;
-        float prize;
-        string type;
         
-        public Tower(GameObject gameObject, string type, float prize, float dmg, float range, Vector2 pos) : base(gameObject)
+
+        public bool Clicked { get; set; }
+        public float Dmg {get; }
+        public float Range { get; }
+        public string Type { get; }
+        public float Price { get;  }
+
+        public Tower(GameObject gameObject, string type, Vector2 pos) : base(gameObject)
         {
-            this.type = type;
-            this.prize = prize;
-            this.dmg = dmg;
+            this.Type = type;
+
             this.pos = pos;
         }
 
 
-        public bool Build()
+        public bool Build(Vector2 pos)
         {
             if(GameLogic.Instance.TowerIconClicked == true)
             {
@@ -41,9 +45,11 @@ namespace _1YearProject.TowerDefense
             }
             return true;
         }
+
+        
         public bool Space()
         {
-            if (type == "asda")
+            if (Clicked == true)
             {
                 return false;
             }
