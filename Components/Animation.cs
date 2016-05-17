@@ -9,11 +9,11 @@ namespace _1YearProject.Components
 {
     class Animation
     {
-        float fps;
+        int fps;
         Vector2 offset;
         Rectangle[] rectangles;
 
-        public float Fps
+        public int Fps
         {
             get { return fps; }
             set { fps = value; }
@@ -31,7 +31,7 @@ namespace _1YearProject.Components
             set { rectangles = value; }
         }
 
-        public Animation(int frames, int yPos, int xStratFrame, int width, int height, float FPS, Vector2 offset)
+        public Animation(int frames, int yPos, int xStratFrame, int width, int height, int FPS, Vector2 offset)
         {
             Rectangles = new Rectangle[frames];
 

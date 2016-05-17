@@ -108,5 +108,16 @@ namespace _1YearProject
                 }
             }
         }
+
+        public void OnCollisionExit(Collider other)
+        {
+            foreach (Component comp in components)
+            {
+                if (comp is ICollisionExit)
+                {
+                    (comp as ICollisionExit).OnCollisionExit(other);
+                }
+            }
+        }
     }
 }

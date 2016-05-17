@@ -18,7 +18,7 @@ namespace _1YearProject.Components
         float fps;
         Rectangle[] rectangles;
         private string animationName;
-        private Dictionary<string, Animation> animations;
+        public Dictionary<string, Animation> animations;
 
         public Animator(GameObject gameObject) : base(gameObject)
         {
@@ -71,6 +71,11 @@ namespace _1YearProject.Components
                 currentIndex = 0;
 
             }
+        }
+        
+        public void myAnimation()
+        {
+            
         }
     }
 }

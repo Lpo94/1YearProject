@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using _1YearProject.Interfaces;
 
 namespace _1YearProject.Components
@@ -18,6 +19,7 @@ namespace _1YearProject.Components
         private Animator animator;
         private List<Collider> otherColliders = new List<Collider>();
         private Dictionary<string, Color[][]> pixels;
+        public Color[] textureData;
 
         /**private Color[] CurrentPixels
         {
@@ -55,6 +57,9 @@ namespace _1YearProject.Components
             spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
 
             texture2D = content.Load<Texture2D>("CollisionTexture");
+
+            textureData = new Color[texture2D.Width * texture2D.Height];
+            texture2D.GetData(textureData);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -84,19 +89,66 @@ namespace _1YearProject.Components
                     {
                         if (CollisionBox.Intersects(other.CollisionBox))
                         {
-
                             gameObject.OnCollisionEnter(other);
                             otherColliders.Add(other);
 
                         }
                         else if (!CollisionBox.Intersects(other.CollisionBox))
                         {
-
+                            gameObject.OnCollisionExit(other);
                             otherColliders.Remove(other);
                         }
                     }
                 }
             }
         }
+
+        /*private void CachePixels()
+        {
+            foreach(KeyValuePair<string, Animation> pair in animator.animations)
+            {
+                Animation animation = pair.Value;
+
+                Color[][] colors = new Color[animation.Fps][];
+
+                for (int i = 0; i < animation.Fps; i++)
+                {
+                    colors[i] = new Color[animation.Rectangles[i].Width * animation.Rectangles[i].Height];
+
+                    spriteRenderer.Sprite.GetData(0, animation.Rectangles[i], colors[i], 0, animation.Rectangles[i].Width * animation.Rectangles[i].Height);
+                }
+
+                pixels.Add(pair.Key, colors);
+            }
+        }*/
+
+
+
+        /*private bool CheckPixelCollision(Collider other)
+        {
+            int top = Math.Max(CollisionBox.Top, other.CollisionBox.Top);
+            int bottom = Math.Max(CollisionBox.Bottom, other.CollisionBox.Bottom);
+            int left = Math.Max(CollisionBox.Left, other.CollisionBox.Left);
+            int right = Math.Max(CollisionBox.Right, other.CollisionBox.Right);
+
+            for (int y = top; y < bottom; y++)
+            {
+                for (int x = left; x < right; x++)
+                {
+                    int firstIndex = (x - CollisionBox.Left) + (y - CollisionBox.Top) * CollisionBox.Width;
+                    int secondIndex = (x - other.CollisionBox.Left) + (y - other.CollisionBox.Top) * other.CollisionBox.Width;
+
+                    Color colorA = ;
+                    Color colorB = ;
+
+                    if(colorA.A != 0 && colorB.A != 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }*/
     }
-    }
+}

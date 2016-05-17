@@ -22,6 +22,11 @@ namespace _1YearProject
         private List<GameObject> inGame = new List<GameObject>();
         public float deltaTime { get; private set; }
 
+        // Cursor
+        Texture2D cursorTexture;
+        Rectangle CursorRectangle;
+        Color cursorTextureData;
+
         internal static List<Collider> colliders = new List<Collider>();
 
 

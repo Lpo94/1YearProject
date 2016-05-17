@@ -13,7 +13,7 @@ enum DIRECTION { Front, Back, Left, Right }
 
 namespace _1YearProject
 {
-    class Player : Component, IUpdate, ILoad, ICollisionEnter
+    class Player : Component, IUpdate, ILoad, ICollisionEnter, ICollisionExit
     {
         private SpriteRenderer spriteRenderer;
         private float speed = 0.5f;
@@ -27,7 +27,7 @@ namespace _1YearProject
         public void LoadContent(ContentManager content)
         {
             this.animator = (Animator)gameObject.GetComponent("Animator");
-            
+
             CreateAnimations();
             animator.PlayAnimation("IdleBack");
         }
@@ -69,7 +69,6 @@ namespace _1YearProject
 
         }
 
-
         public void OnCollisionEnter(Collider other)
         {
             spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
@@ -78,6 +77,7 @@ namespace _1YearProject
 
         public void OnCollisionExit(Collider other)
         {
+            spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
             spriteRenderer.Color = Color.White;
         }
 
