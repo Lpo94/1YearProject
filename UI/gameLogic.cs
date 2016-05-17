@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using _1YearProject.Components;
 using _1YearProject.Interfaces;
-using _1YearProject.UI;
+using _1YearProject.Builder;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -30,6 +30,11 @@ namespace _1YearProject.UI
             }
         }
         
-        public bool TowerIconClicked { get; set; }
+        
+        
+        public void CreateObjects()
+        {
+            
+        }
     }
 }

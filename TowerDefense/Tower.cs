@@ -14,60 +14,58 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject.TowerDefense
 {
-    abstract class Tower : Component,IUpdate,ILoad
+    class Tower : Component, IUpdate, ILoad, IDraw
     {
-        float range;
-        float dmg;
-        Vector2 pos;
-        Texture2D tex;
-        Rectangle rect;
-        float prize;
-        string type;
-        
-        public Tower(GameObject gameObject, string type, float prize, float dmg, float range, Vector2 pos) : base(gameObject)
-        {
-            this.type = type;
-            this.prize = prize;
-            this.dmg = dmg;
-            this.pos = pos;
-        }
 
+        private Transform transform;
+        private Collider collider;
+        private Animator animator;
 
-        public bool Build()
+        public bool Clicked { get; set; }
+        public float Dmg {get; }
+        public float Range { get; }
+        public string Type { get; }
+        public float Price { get;  }
+
+        public Tower(GameObject gameObject, string type, Vector2 pos) : base(gameObject)
         {
-            if(GameLogic.Instance.TowerIconClicked == true)
-            {
-                
-            }
-            return true;
-        }
-        public bool Space()
-        {
-            if (type == "asda")
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            this.Type = type;
             
+            transform = gameObject.GetTransform;
+            switch (type)
+            {
+                case "normal":
+                    Dmg = 1;
+                    Range = 3;
+                    Price = 100;
+                    break;
+            }
+            transform.Position = pos;
         }
 
-        private bool Targetted()
-        {
-            return true;
-        }
 
         public void Update()
         {
-            rect.X = Mouse.GetState().X - 4;
-            rect.Y = Mouse.GetState().Y - 4;
+            
+
         }
 
         public void LoadContent(ContentManager content)
+        {            
+            this.collider = (Collider)gameObject.GetComponent("Collider");
+            this.animator = (Animator)gameObject.GetComponent("Animator");
+            CreateAnimations();
+        }
+
+        public void CreateAnimations()
         {
-            rect = new Rectangle(0,0, 8, 8);
+            animator.CreateAnimation("static", new Animation(1, 0, 0, 50, 36, 6, Vector2.Zero));
+            animator.PlayAnimation("static");
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            
         }
     }
 }

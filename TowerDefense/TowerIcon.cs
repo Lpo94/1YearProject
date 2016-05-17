@@ -18,11 +18,13 @@ namespace _1YearProject.TowerDefense
         private Transform transform;
         private Collider collider;
         private Animator animator;
+        
+        public static bool Clicked { get; set; }
 
 
         public TowerIcon(GameObject gameObject, Vector2 pos) : base(gameObject)
         {
-            this.transform = gameObject.GetTransform;
+            transform = gameObject.GetTransform;
             transform.Position = pos;
         }
 
@@ -38,9 +40,11 @@ namespace _1YearProject.TowerDefense
         {
             if (collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                
-                GameLogic.Instance.TowerIconClicked = true;
-
+                Clicked = true;
+            }
+            else if(!collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                Clicked = false;
             }
         }
 
