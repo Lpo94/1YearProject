@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using _1YearProject.Components;
 using _1YearProject.Interfaces;
+using _1YearProject.Builder;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -59,6 +60,7 @@ namespace _1YearProject.UI
             if (textBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 clicked = true;
+                
             }
             else if(!textBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed) { clicked = false; }
 

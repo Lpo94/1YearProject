@@ -12,7 +12,7 @@ namespace _1YearProject.Builder
 {
     class PlayerBuilder : IBuilder
     {
-        private GameObject gameObject = new GameObject();
+        private GameObject gameObject;
 
         public GameObject GetResult()
         {
@@ -21,6 +21,7 @@ namespace _1YearProject.Builder
 
         public void BuildGameObject(Vector2 position)
         {
+            gameObject = new GameObject();
 
             gameObject.AddComponent(new SpriteRenderer(gameObject, "HeroSheet", 1, position));
 

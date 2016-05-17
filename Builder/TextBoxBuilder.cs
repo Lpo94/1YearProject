@@ -12,7 +12,7 @@ namespace _1YearProject
 {
     class TextBoxBuilder : IBuilder
     {
-        private GameObject gameObject = new GameObject();
+        private GameObject gameObject;
 
         public GameObject GetResult()
         {
@@ -21,9 +21,8 @@ namespace _1YearProject
 
         public void BuildGameObject(Vector2 position)
         {
-
+            gameObject = new GameObject();
             gameObject.AddComponent(new TextBox(gameObject, 300,25, position));
-
 
         }
     }

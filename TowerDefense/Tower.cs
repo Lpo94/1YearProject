@@ -14,14 +14,12 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject.TowerDefense
 {
-    abstract class Tower : Component, IUpdate, ILoad
+    class Tower : Component, IUpdate, ILoad, IDraw
     {
 
-        
-        Vector2 pos;
-        Texture2D tex;
-        Rectangle rect;
-        
+        private Transform transform;
+        private Collider collider;
+        private Animator animator;
 
         public bool Clicked { get; set; }
         public float Dmg {get; }
@@ -32,48 +30,42 @@ namespace _1YearProject.TowerDefense
         public Tower(GameObject gameObject, string type, Vector2 pos) : base(gameObject)
         {
             this.Type = type;
-
-            this.pos = pos;
-        }
-
-
-        public bool Build(Vector2 pos)
-        {
-            if(GameLogic.Instance.TowerIconClicked == true)
-            {
-                
-            }
-            return true;
-        }
-
-        
-        public bool Space()
-        {
-            if (Clicked == true)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
             
+            transform = gameObject.GetTransform;
+            switch (type)
+            {
+                case "normal":
+                    Dmg = 1;
+                    Range = 3;
+                    Price = 100;
+                    break;
+            }
+            transform.Position = pos;
         }
 
-        private bool Targetted()
-        {
-            return true;
-        }
 
         public void Update()
         {
-            rect.X = Mouse.GetState().X - 4;
-            rect.Y = Mouse.GetState().Y - 4;
+            
+
         }
 
         public void LoadContent(ContentManager content)
+        {            
+            this.collider = (Collider)gameObject.GetComponent("Collider");
+            this.animator = (Animator)gameObject.GetComponent("Animator");
+            CreateAnimations();
+        }
+
+        public void CreateAnimations()
         {
-            rect = new Rectangle(0,0, 8, 8);
+            animator.CreateAnimation("static", new Animation(1, 0, 0, 50, 36, 6, Vector2.Zero));
+            animator.PlayAnimation("static");
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            
         }
     }
 }
