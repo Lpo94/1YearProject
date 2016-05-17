@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using _1YearProject.Components;
 using _1YearProject.Builder;
+using _1YearProject.TowerDefense;
 using System.Collections.Generic;
 
 namespace _1YearProject
@@ -21,6 +22,11 @@ namespace _1YearProject
         private List<GameObject> gameObjects = new List<GameObject>();
         private List<GameObject> inGame = new List<GameObject>();
         public float deltaTime { get; private set; }
+        private Director towerDirector = new Director(new TowerBuilder());
+        public bool canBuild;
+
+        private Rectangle cursorRect;
+        private Texture2D cursorTex;
 
         internal static List<Collider> colliders = new List<Collider>();
 
@@ -72,7 +78,7 @@ namespace _1YearProject
 
 
             inGame.Add(player);
-            gameObjects.Add(icon);
+            inGame.Add(icon);
             gameObjects.Add(textBox1);
             gameObjects.Add(textBox2);
 
@@ -87,11 +93,13 @@ namespace _1YearProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            cursorTex = Content.Load<Texture2D>("textbox");
+            cursorRect = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 32, 32);
 
-                foreach (GameObject go in gameObjects)
+            foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
-        }
+            }
             foreach (GameObject go in inGame)
             {
                 go.LoadContent(Content);
@@ -121,12 +129,37 @@ namespace _1YearProject
             {
             }
 
-            if(Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.inGame)
+            foreach (Collider col in colliders)
+            {
+                if (TowerIcon.Clicked == true)
+                {
+                    if (!col.CollisionBox.Intersects(cursorRect))
+                    {
+                        
+                        canBuild = true;
+                    }
+                    else if(col.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)))
+                    {
+                        canBuild = false;
+                    }
+                }
+            }
+
+            cursorRect.X = Mouse.GetState().X-16;
+            cursorRect.Y = Mouse.GetState().Y-16;
+            
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.inGame)
             {
                 MainMenu._GameState = GameState.pause;
             }
 
-            switch(MainMenu._GameState)
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
+            {
+                BuildTower(new Vector2(Mouse.GetState().X,Mouse.GetState().Y));
+            }
+
+            switch (MainMenu._GameState)
             {
                 case GameState.loginScreen:
                     foreach (GameObject obj in gameObjects)
@@ -183,10 +216,29 @@ namespace _1YearProject
                     // TODO: Add your drawing code here
 
                     MainMenu.Instance.Draw(spriteBatch);
+            if(TowerIcon.Clicked == true)
+            {
+                spriteBatch.Draw(cursorTex, cursorRect, Color.White);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
             
+        }
+
+        internal void BuildTower(Vector2 pos)
+        {
+            if (canBuild == true)
+            {
+
+                towerDirector.Construct(pos);
+                GameObject go = towerDirector.GetGameObject();
+                inGame.Add(go);
+                go.LoadContent(Content);
+                TowerIcon.Clicked = false;
+                canBuild = false;
+            }
+
         }
     }
 }
