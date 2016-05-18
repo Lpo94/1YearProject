@@ -55,6 +55,7 @@ namespace _1YearProject
             graphics.PreferredBackBufferHeight = 1000;
             graphics.PreferredBackBufferWidth = 1400;
             IsMouseVisible = true;
+            
         }
 
         /// <summary>
@@ -79,11 +80,16 @@ namespace _1YearProject
             director = new Director(new PlayerBuilder());
             director.Construct(new Vector2(400, 400));
             GameObject player = director.GetGameObject();
+            director = new Director(new MainbuildingBuilder());
+            director.Construct(new Vector2(100, 200));
+            GameObject mainbuilding = director.GetGameObject();
+
 
 
 
             inGame.Add(player);
             inGame.Add(icon);
+            inGame.Add(mainbuilding);
             gameObjects.Add(textBox1);
             gameObjects.Add(textBox2);
 
@@ -100,7 +106,7 @@ namespace _1YearProject
             spriteBatch = new SpriteBatch(GraphicsDevice);
             cursorTex = Content.Load<Texture2D>("textbox");
             cursorRect = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 32, 32);
-
+            
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
