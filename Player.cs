@@ -116,7 +116,6 @@ namespace _1YearProject
             {
                 animator.PlayAnimation("IdleFront");
             }
-            
 
 
             gameObject.GetTransform.Translate(translation*speed*GameWorld.Instance.deltaTime);

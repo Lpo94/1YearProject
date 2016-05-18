@@ -10,7 +10,7 @@ using _1YearProject.UI;
 
 namespace _1YearProject
 {
-    class TextBoxBuilder : IBuilder
+    class FruitBuilder : IBuilder
     {
         private GameObject gameObject;
 
@@ -22,7 +22,14 @@ namespace _1YearProject
         public void BuildGameObject(Vector2 position)
         {
             gameObject = new GameObject();
-            gameObject.AddComponent(new TextBox(gameObject, 300,25, position));
+
+            gameObject.AddComponent(new SpriteRenderer(gameObject, "mid player", 1, position));
+
+            gameObject.AddComponent(new Fruits(gameObject));
+
+            gameObject.AddComponent(new Animator(gameObject));
+
+            gameObject.AddComponent(new Collider(gameObject));
         }
     }
 }

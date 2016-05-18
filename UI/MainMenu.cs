@@ -146,35 +146,35 @@ namespace _1YearProject
             }
         }
 
-        public void Draw(SpriteBatch spritebatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             switch (gameState)
             {
                 case GameState.loginScreen:
                     foreach (GUIElement element in login)
                     {
-                        element.Draw(spritebatch);
+                        element.Draw(spriteBatch);
                     }
                     break;
 
                 case GameState.mainMenu:
                     foreach (GUIElement element in main)
                     {
-                        element.Draw(spritebatch);
+                        element.Draw(spriteBatch);
                     }
                     break;
 
                 case GameState.inGame:
                     foreach (GUIElement element in inGame)
                     {
-                        element.Draw(spritebatch);
+                        element.Draw(spriteBatch);
                     }
                     break;
 
                 case GameState.pause:
                     foreach (GUIElement element in pause)
                     {
-                        element.Draw(spritebatch);
+                        element.Draw(spriteBatch);
                     }
                     break;
 
