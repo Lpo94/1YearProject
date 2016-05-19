@@ -46,8 +46,6 @@ namespace _1YearProject.TowerDefense
 
             gameObject.AddComponent(new SpriteRenderer(gameObject, "Textbox", 1, transform.Position));
 
-            gameObject.AddComponent(new Player(gameObject));
-
             gameObject.AddComponent(new Animator(gameObject));
 
             gameObject.AddComponent(new Collider(gameObject));

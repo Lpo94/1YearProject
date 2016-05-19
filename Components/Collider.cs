@@ -36,8 +36,6 @@ namespace _1YearProject.Components
         public void Update()
         {
             CheckCollision();
-
-            //CheckPixelCollision();
         }
 
         public Rectangle CollisionBox
@@ -101,53 +99,5 @@ namespace _1YearProject.Components
                 }
             }
         }
-
-        /*private void CachePixels()
-        {
-            foreach(KeyValuePair<string, Animation> pair in animator.animations)
-            {
-                Animation animation = pair.Value;
-
-                Color[][] colors = new Color[animation.Fps][];
-
-                for (int i = 0; i < animation.Fps; i++)
-                {
-                    colors[i] = new Color[animation.Rectangles[i].Width * animation.Rectangles[i].Height];
-
-                    spriteRenderer.Sprite.GetData(0, animation.Rectangles[i], colors[i], 0, animation.Rectangles[i].Width * animation.Rectangles[i].Height);
-                }
-
-                pixels.Add(pair.Key, colors);
-            }
-        }*/
-
-
-
-        /*private bool CheckPixelCollision(Collider other)
-        {
-            int top = Math.Max(CollisionBox.Top, other.CollisionBox.Top);
-            int bottom = Math.Max(CollisionBox.Bottom, other.CollisionBox.Bottom);
-            int left = Math.Max(CollisionBox.Left, other.CollisionBox.Left);
-            int right = Math.Max(CollisionBox.Right, other.CollisionBox.Right);
-
-            for (int y = top; y < bottom; y++)
-            {
-                for (int x = left; x < right; x++)
-                {
-                    int firstIndex = (x - CollisionBox.Left) + (y - CollisionBox.Top) * CollisionBox.Width;
-                    int secondIndex = (x - other.CollisionBox.Left) + (y - other.CollisionBox.Top) * other.CollisionBox.Width;
-
-                    Color colorA = ??;
-                    Color colorB = ??;
-
-                    if(colorA.A != 0 && colorB.A != 0)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }*/
     }
 }

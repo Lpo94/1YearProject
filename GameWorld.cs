@@ -133,7 +133,7 @@ namespace _1YearProject
             {
                 go.LoadContent(Content);
             }
-
+            MouseCursor.Instance.LoadContent(Content);
             MainMenu.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
@@ -212,6 +212,7 @@ namespace _1YearProject
                     {
                         obj.Update();
                     }
+                    break;
 
                    
                 default:
@@ -222,6 +223,7 @@ namespace _1YearProject
                 deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
 
             // TODO: Add your update logic here
+            MouseCursor.Instance.Update();
             MainMenu.Instance.Update();
             MiniGames.Instance.Update();
             base.Update(gameTime);
