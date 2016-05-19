@@ -72,7 +72,7 @@ namespace _1YearProject.TowerDefense
         }
         public void CreateAnimations()
         {
-            animator.CreateAnimation("Static", new Animation(1, 0, 0, 512, 512, 1, Vector2.Zero));
+            animator.CreateAnimation("Static", new Animation(1, 0, 0, 32, 32, 1, Vector2.Zero));
             animator.PlayAnimation("Static");
         }
     }

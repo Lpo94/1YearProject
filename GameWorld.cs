@@ -81,12 +81,15 @@ namespace _1YearProject
             GameObject textBox1 = director.GetGameObject();
             director.Construct(new Vector2(545, 435));
             GameObject textBox2 = director.GetGameObject();
+
             director = new Director(new TowerIconBuilder());
             director.Construct(new Vector2(100, 100));
             GameObject icon = director.GetGameObject();
+
             director = new Director(new PlayerBuilder());
             director.Construct(new Vector2(400, 400));
             GameObject player = director.GetGameObject();
+
             director = new Director(new FruitBuilder());
             director.Construct(new Vector2(100, 0));
             GameObject fruit = director.GetGameObject();
@@ -94,16 +97,27 @@ namespace _1YearProject
             GameObject fruit2 = director.GetGameObject();
             director.Construct(new Vector2(100, 0));
             GameObject fruit3 = director.GetGameObject();
+
             director = new Director(new BasketBuilder());
             director.Construct(new Vector2(0, 950));
             GameObject basket = director.GetGameObject();
+
+            director = new Director(new CursorBuilder());
+            director.Construct(Vector2.Zero);
+            GameObject cursor = director.GetGameObject();
+
+            director = new Director(new MainbuildingBuilder());
+            director.Construct(new Vector2(450, 450));
+            GameObject mainBuilding = director.GetGameObject();
+
             inGame.Add(basket);
             events.Add(fruit);
             events.Add(fruit2);
             events.Add(fruit3);
             inGame.Add(player);
             inGame.Add(icon);
-            inGame.Add(mainbuilding);
+            inGame.Add(mainBuilding);
+            inGame.Add(cursor);
             gameObjects.Add(textBox1);
             gameObjects.Add(textBox2);
 
@@ -133,7 +147,7 @@ namespace _1YearProject
             {
                 go.LoadContent(Content);
             }
-            MouseCursor.Instance.LoadContent(Content);
+
             MainMenu.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
@@ -183,7 +197,7 @@ namespace _1YearProject
 
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
-                BuildTower(new Vector2(Mouse.GetState().X,Mouse.GetState().Y));
+                BuildTower(new Vector2(Mouse.GetState().X-16,Mouse.GetState().Y-16));
             }
 
             switch (MainMenu._GameState)
@@ -200,7 +214,7 @@ namespace _1YearProject
                     {
                         obj.Update();
                     }
-                    MouseCursor.Instance.Update();
+
                     break;
 
                 case GameState.events:
@@ -223,7 +237,7 @@ namespace _1YearProject
                 deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
 
             // TODO: Add your update logic here
-            MouseCursor.Instance.Update();
+
             MainMenu.Instance.Update();
             MiniGames.Instance.Update();
             base.Update(gameTime);

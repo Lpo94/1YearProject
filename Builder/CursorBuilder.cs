@@ -11,26 +11,24 @@ using _1YearProject.TowerDefense;
 
 namespace _1YearProject.Builder
 {
-    class MainbuildingBuilder : IBuilder
+    class CursorBuilder:IBuilder
     {
         private GameObject gameObject;
+
+        public void BuildGameObject(Vector2 position)
+        {
+            gameObject = new GameObject();
+            gameObject.AddComponent(new Transform(gameObject, Vector2.Zero));
+            gameObject.AddComponent(new SpriteRenderer(gameObject, "Textbox", 1, position));
+            gameObject.AddComponent(new MouseCursor(gameObject));
+            gameObject.AddComponent(new Animator(gameObject));
+            gameObject.AddComponent(new Collider(gameObject));
+        }
 
         public GameObject GetResult()
         {
             return gameObject;
         }
-
-        public void BuildGameObject(Vector2 position)
-        {
-            gameObject = new GameObject();
-
-            gameObject.AddComponent(new SpriteRenderer(gameObject, "textboxtar", 1, position));
-
-            gameObject.AddComponent(new Mainbuilding(gameObject, 25, 25, position));
-
-            gameObject.AddComponent(new Animator(gameObject));
-
-            gameObject.AddComponent(new Collider(gameObject));
-        }
     }
 }
+

@@ -59,7 +59,7 @@ namespace _1YearProject.TowerDefense
 
         public void CreateAnimations()
         {
-            animator.CreateAnimation("static", new Animation(1, 0, 0, 50, 36, 6, Vector2.Zero));
+            animator.CreateAnimation("static", new Animation(1, 0, 0, 36, 36, 6, Vector2.Zero));
             animator.PlayAnimation("static");
         }
 
