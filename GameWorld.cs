@@ -97,7 +97,7 @@ namespace _1YearProject
             director.Construct(new Vector2(0, 950));
             GameObject basket = director.GetGameObject();
 
-            events.Add(basket);
+            inGame.Add(basket);
             events.Add(fruit);
             events.Add(fruit2);
             events.Add(fruit3);

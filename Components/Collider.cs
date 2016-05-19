@@ -36,6 +36,8 @@ namespace _1YearProject.Components
         public void Update()
         {
             CheckCollision();
+
+            //CheckPixelCollision();
         }
 
         public Rectangle CollisionBox
@@ -68,10 +70,7 @@ namespace _1YearProject.Components
             Rectangle bottomLine = new Rectangle(CollisionBox.X, CollisionBox.Y + CollisionBox.Height, CollisionBox.Width, 1);
             Rectangle rightLine = new Rectangle(CollisionBox.X + CollisionBox.Width, CollisionBox.Y, 1, CollisionBox.Height);
             Rectangle leftLine = new Rectangle(CollisionBox.X, CollisionBox.Y, 1, CollisionBox.Height);
-            spriteBatch.Draw(texture2D, topLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
-            spriteBatch.Draw(texture2D, bottomLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
-            spriteBatch.Draw(texture2D, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
-            spriteBatch.Draw(texture2D, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+
         }
 
         public void SetDoCollisionChecks()
@@ -138,8 +137,8 @@ namespace _1YearProject.Components
                     int firstIndex = (x - CollisionBox.Left) + (y - CollisionBox.Top) * CollisionBox.Width;
                     int secondIndex = (x - other.CollisionBox.Left) + (y - other.CollisionBox.Top) * other.CollisionBox.Width;
 
-                    Color colorA = ;
-                    Color colorB = ;
+                    Color colorA = ??;
+                    Color colorB = ??;
 
                     if(colorA.A != 0 && colorB.A != 0)
                     {
