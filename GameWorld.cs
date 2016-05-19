@@ -16,14 +16,21 @@ namespace _1YearProject
     public class GameWorld : Game
     {
         private SpriteRenderer spriteRenderer;
-        GraphicsDeviceManager graphics;
+        private static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         static GameWorld instance;
         private List<GameObject> gameObjects = new List<GameObject>();
         private List<GameObject> inGame = new List<GameObject>();
+        private List<GameObject> events = new List<GameObject>();
         public float deltaTime { get; private set; }
         private Director towerDirector = new Director(new TowerBuilder());
         public bool canBuild;
+
+        public static GraphicsDeviceManager Graphics
+        {
+            get { return graphics; }
+            set { graphics = value; }
+        }
 
         private Rectangle cursorRect;
         private Texture2D cursorTex;
@@ -80,13 +87,20 @@ namespace _1YearProject
             director = new Director(new PlayerBuilder());
             director.Construct(new Vector2(400, 400));
             GameObject player = director.GetGameObject();
-            director = new Director(new MainbuildingBuilder());
-            director.Construct(new Vector2(100, 200));
-            GameObject mainbuilding = director.GetGameObject();
-
-
-
-
+            director = new Director(new FruitBuilder());
+            director.Construct(new Vector2(100, 0));
+            GameObject fruit = director.GetGameObject();
+            director.Construct(new Vector2(100, 0));
+            GameObject fruit2 = director.GetGameObject();
+            director.Construct(new Vector2(100, 0));
+            GameObject fruit3 = director.GetGameObject();
+            director = new Director(new BasketBuilder());
+            director.Construct(new Vector2(0, 950));
+            GameObject basket = director.GetGameObject();
+            inGame.Add(basket);
+            events.Add(fruit);
+            events.Add(fruit2);
+            events.Add(fruit3);
             inGame.Add(player);
             inGame.Add(icon);
             inGame.Add(mainbuilding);
@@ -104,9 +118,8 @@ namespace _1YearProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cursorTex = Content.Load<Texture2D>("textbox");
-            cursorRect = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 32, 32);
-            
+
+
             foreach (GameObject go in gameObjects)
             {
                 go.LoadContent(Content);
@@ -116,6 +129,11 @@ namespace _1YearProject
                 go.LoadContent(Content);
             }
 
+            foreach (GameObject go in events)
+            {
+                go.LoadContent(Content);
+            }
+            MouseCursor.Instance.LoadContent(Content);
             MainMenu.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
@@ -142,27 +160,25 @@ namespace _1YearProject
 
             foreach (Collider col in colliders)
             {
-                if (TowerIcon.Clicked == true)
-                {
-                    if (!col.CollisionBox.Intersects(cursorRect))
-                    {
                         
-                        canBuild = true;
                     }
-                    else if(col.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)))
+
+
+            
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.inGame || Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.events)
                     {
-                        canBuild = false;
-                    }
-                }
+                MainMenu._GameState = GameState.pause;
             }
 
-            cursorRect.X = Mouse.GetState().X-16;
-            cursorRect.Y = Mouse.GetState().Y-16;
-            
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.inGame)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && MainMenu._GameState == GameState.inGame)
             {
-                MainMenu._GameState = GameState.pause;
+                MainMenu._GameState = GameState.events;
+            }
+            
+            else if (Keyboard.GetState().IsKeyDown(Keys.Space) && MainMenu._GameState == GameState.events)
+            {
+                MainMenu._GameState = GameState.inGame;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.M))
@@ -184,7 +200,21 @@ namespace _1YearProject
                     {
                         obj.Update();
                     }
+                    MouseCursor.Instance.Update();
                     break;
+
+                case GameState.events:
+                    foreach (GameObject obj in events)
+                    {
+                        obj.Update();
+                    }
+                    foreach (GameObject obj in inGame)
+                    {
+                        obj.Update();
+                    }
+                    break;
+
+                   
                 default:
                     break;
 
@@ -193,7 +223,9 @@ namespace _1YearProject
                 deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
 
             // TODO: Add your update logic here
+            MouseCursor.Instance.Update();
             MainMenu.Instance.Update();
+            MiniGames.Instance.Update();
             base.Update(gameTime);
         }
 
@@ -220,6 +252,12 @@ namespace _1YearProject
                         obj.Draw(spriteBatch);
                     }
                     break;
+                case GameState.events:
+                    foreach (GameObject obj in events)
+                    {
+                        obj.Draw(spriteBatch);
+                    }
+                    break;
 
                 default:
                     break;
@@ -227,10 +265,7 @@ namespace _1YearProject
                     // TODO: Add your drawing code here
 
                     MainMenu.Instance.Draw(spriteBatch);
-            if(TowerIcon.Clicked == true)
-            {
-                spriteBatch.Draw(cursorTex, cursorRect, Color.White);
-            }
+          
             spriteBatch.End();
 
             base.Draw(gameTime);

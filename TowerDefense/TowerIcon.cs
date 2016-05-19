@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject.TowerDefense
 {
-    class TowerIcon : Component, IUpdate,ILoad,IDraw
+    class TowerIcon : Component, IUpdate,ILoad
     {
         private Transform transform;
         private Collider collider;
@@ -48,10 +48,6 @@ namespace _1YearProject.TowerDefense
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            
-        }
         public void CreateAnimations()
         {
             animator.CreateAnimation("static", new Animation(1, 0, 0, 50, 36, 6, Vector2.Zero));
