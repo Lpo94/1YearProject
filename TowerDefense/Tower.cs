@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject.TowerDefense
 {
-    class Tower : Component, IUpdate, ILoad, IDraw
+    class Tower : Component, IUpdate, ILoad
     {
 
         private Transform transform;
@@ -22,10 +22,12 @@ namespace _1YearProject.TowerDefense
         private Animator animator;
 
         public bool Clicked { get; set; }
-        public float Dmg {get; }
-        public float Range { get; }
-        public string Type { get; }
-        public float Price { get;  }
+        public float Dmg { get; set; }
+        public float atkSpeed { get; set; }
+        private float myAttackSpeed;
+        public float Range { get; set; }
+        public string Type { get; set; }
+        public float Price { get; set; }
 
         public Tower(GameObject gameObject, string type, Vector2 pos) : base(gameObject)
         {
@@ -36,6 +38,8 @@ namespace _1YearProject.TowerDefense
             {
                 case "normal":
                     Dmg = 1;
+                    atkSpeed = 500;
+                    myAttackSpeed = atkSpeed;
                     Range = 3;
                     Price = 100;
                     break;
@@ -46,7 +50,7 @@ namespace _1YearProject.TowerDefense
 
         public void Update()
         {
-            
+            Shoot();
 
         }
 
@@ -68,6 +72,16 @@ namespace _1YearProject.TowerDefense
             
         }
 
+        public void Shoot()
+        {
+            if (atkSpeed <= 0)
+            {
+                GameWorld.Instance.CreateBullet(transform.Position, 0.5f, 1);
+                atkSpeed = myAttackSpeed;
+            }
+            else
+                atkSpeed -= GameWorld.Instance.deltaTime;
+        }
 
     }
 }

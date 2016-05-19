@@ -15,8 +15,8 @@ namespace _1YearProject.TowerDefense
 {
     class TowerShot:Component,IUpdate,ILoad
     {
-        private float dmg;
-        private float speed;
+        private float dmg = 0;
+        private float speed = 0;
 
         private Transform transform;
         private Animator animator;
@@ -39,13 +39,14 @@ namespace _1YearProject.TowerDefense
 
         public void Update()
         {
-
-            gameObject.GetTransform.Translate(new Vector2(0,1) * speed * GameWorld.Instance.deltaTime);
+            Vector2 translation = Vector2.Zero;
+            translation += new Vector2(0, -1);
+            gameObject.GetTransform.Translate(translation * speed * GameWorld.Instance.deltaTime);
         }
 
         public void CreateAnimations()
         {
-            animator.CreateAnimation("static", new Animation(1, 0, 0, 8, 8, 6, Vector2.Zero));
+            animator.CreateAnimation("static", new Animation(1, 0, 0, 8, 2, 6, Vector2.Zero));
             animator.PlayAnimation("static");
         }
 

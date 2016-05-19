@@ -23,7 +23,8 @@ namespace _1YearProject
         private List<GameObject> inGame = new List<GameObject>();
         private List<GameObject> events = new List<GameObject>();
         public float deltaTime { get; private set; }
-        private Director towerDirector = new Director(new TowerBuilder());
+        private Director globalDirector = new Director(new TowerBuilder());
+        private Director bulletDirector = new Director(new BulletBuilder());
         public bool canBuild;
 
         public static GraphicsDeviceManager Graphics
@@ -31,11 +32,6 @@ namespace _1YearProject
             get { return graphics; }
             set { graphics = value; }
         }
-
-        // Cursor
-        Texture2D cursorTexture;
-        Rectangle CursorRectangle;
-        Color cursorTextureData;
 
         internal static List<Collider> colliders = new List<Collider>();
 
@@ -288,8 +284,8 @@ namespace _1YearProject
             if (canBuild == true)
             {
 
-                towerDirector.Construct(pos, 0, 0);
-                GameObject tower = towerDirector.GetGameObject();
+                globalDirector.Construct(pos, 0, 0);
+                GameObject tower = globalDirector.GetGameObject();
                 inGame.Add(tower);
                 tower.LoadContent(Content);
                 TowerIcon.Clicked = false;
@@ -298,9 +294,14 @@ namespace _1YearProject
 
         }
 
-        internal void CreateBullet(Vector2 pos)
+        internal void CreateBullet(Vector2 pos, float speed, float dmg)
         {
             
+            bulletDirector.Construct(pos, speed, dmg);
+            GameObject bullet = bulletDirector.GetGameObject();
+            inGame.Add(bullet);
+            bullet.LoadContent(Content);
+
         }
     }
 }
