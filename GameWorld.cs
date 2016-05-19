@@ -26,7 +26,7 @@ namespace _1YearProject
         public bool canBuild;
         
         Level level = new Level();
-        Enemy enemy1;
+        WaveManager waveManager;
 
 
         private Rectangle cursorRect;
@@ -118,8 +118,7 @@ namespace _1YearProject
             level.AddTexture(grass); // 0
             level.AddTexture(path); // 1
             Texture2D enemyTexture = Content.Load<Texture2D>("enemy");
-            enemy1 = new Enemy(enemyTexture, new Vector2(184,75), 100, 10, 1.5f);
-            enemy1.SetWaypoints(level.Waypoints); // 
+            waveManager = new WaveManager(level, 24, enemyTexture);
 
             MainMenu.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
@@ -145,7 +144,7 @@ namespace _1YearProject
             {
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.X)) { enemy1 = new Enemy(enemyTexture, new Vector2(184,75), 100, 10, 1.5f); }
+            
             foreach (Collider col in colliders)
             {
                 
@@ -186,7 +185,7 @@ namespace _1YearProject
             }
                 //Exit();
                 deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
-            enemy1.Update(gameTime);
+            waveManager.Update(gameTime);
             // TODO: Add your update logic here
             MainMenu.Instance.Update();
             base.Update(gameTime);
@@ -215,7 +214,7 @@ namespace _1YearProject
                         obj.Draw(spriteBatch);
                     }
                     level.Draw(spriteBatch);
-                    enemy1.Draw(spriteBatch);
+                    waveManager.Draw(spriteBatch);
                     break;
 
                 default:

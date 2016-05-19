@@ -22,7 +22,7 @@ namespace _1YearProject
         public float DistanceToDestination { get { return Vector2.Distance(position, waypoints.Peek()); } }
 
         public float CurrentHealth { get { return currentHealth; } set { currentHealth = value; } }
-        public bool IsDead { get { return currentHealth <= 0; } }
+        public bool IsDead { get { return !alive; } }
         public int BountyGiven { get { return bountyGiven; } }
 
 
@@ -70,7 +70,8 @@ namespace _1YearProject
             {
                 float healthPercentage = (float)currentHealth / (float)startHealth;
 
-                Color color = new Color(new Vector3(1 - healthPercentage, 1 - healthPercentage, 1 - healthPercentage));
+                
+                Color color = Color.White;
 
                 base.Draw(spriteBatch, color);
             }
