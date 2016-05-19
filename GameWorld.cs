@@ -16,18 +16,21 @@ namespace _1YearProject
     public class GameWorld : Game
     {
         private SpriteRenderer spriteRenderer;
-        GraphicsDeviceManager graphics;
+        private static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         static GameWorld instance;
         private List<GameObject> gameObjects = new List<GameObject>();
         private List<GameObject> inGame = new List<GameObject>();
+        private List<GameObject> events = new List<GameObject>();
         public float deltaTime { get; private set; }
         private Director towerDirector = new Director(new TowerBuilder());
         public bool canBuild;
-        
-        Level level = new Level();
-        WaveManager waveManager;
 
+        public static GraphicsDeviceManager Graphics
+        {
+            get { return graphics; }
+            set { graphics = value; }
+        }
 
         private Rectangle cursorRect;
         private Texture2D cursorTex;
@@ -38,7 +41,7 @@ namespace _1YearProject
         Color cursorTextureData;
 
         internal static List<Collider> colliders = new List<Collider>();
-        private Texture2D enemyTexture;
+
 
         public static GameWorld Instance
         {
@@ -59,6 +62,7 @@ namespace _1YearProject
             graphics.PreferredBackBufferHeight = 1000;
             graphics.PreferredBackBufferWidth = 1400;
             IsMouseVisible = true;
+            
         }
 
         /// <summary>
@@ -77,17 +81,43 @@ namespace _1YearProject
             GameObject textBox1 = director.GetGameObject();
             director.Construct(new Vector2(545, 435));
             GameObject textBox2 = director.GetGameObject();
+
             director = new Director(new TowerIconBuilder());
             director.Construct(new Vector2(100, 100));
             GameObject icon = director.GetGameObject();
+
             director = new Director(new PlayerBuilder());
             director.Construct(new Vector2(400, 400));
             GameObject player = director.GetGameObject();
 
+            director = new Director(new FruitBuilder());
+            director.Construct(new Vector2(100, 0));
+            GameObject fruit = director.GetGameObject();
+            director.Construct(new Vector2(100, 0));
+            GameObject fruit2 = director.GetGameObject();
+            director.Construct(new Vector2(100, 0));
+            GameObject fruit3 = director.GetGameObject();
 
+            director = new Director(new BasketBuilder());
+            director.Construct(new Vector2(0, 950));
+            GameObject basket = director.GetGameObject();
 
+            director = new Director(new CursorBuilder());
+            director.Construct(Vector2.Zero);
+            GameObject cursor = director.GetGameObject();
+
+            director = new Director(new MainbuildingBuilder());
+            director.Construct(new Vector2(450, 450));
+            GameObject mainBuilding = director.GetGameObject();
+
+            inGame.Add(basket);
+            events.Add(fruit);
+            events.Add(fruit2);
+            events.Add(fruit3);
             inGame.Add(player);
             inGame.Add(icon);
+            inGame.Add(mainBuilding);
+            inGame.Add(cursor);
             gameObjects.Add(textBox1);
             gameObjects.Add(textBox2);
 
@@ -102,8 +132,7 @@ namespace _1YearProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cursorTex = Content.Load<Texture2D>("textbox");
-            cursorRect = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 32, 32);
+
 
             foreach (GameObject go in gameObjects)
             {
@@ -113,12 +142,11 @@ namespace _1YearProject
             {
                 go.LoadContent(Content);
             }
-            Texture2D grass = Content.Load<Texture2D>("grass");
-            Texture2D path = Content.Load<Texture2D>("path");
-            level.AddTexture(grass); // 0
-            level.AddTexture(path); // 1
-            Texture2D enemyTexture = Content.Load<Texture2D>("enemy");
-            waveManager = new WaveManager(level, 24, enemyTexture);
+
+            foreach (GameObject go in events)
+            {
+                go.LoadContent(Content);
+            }
 
             MainMenu.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
@@ -144,24 +172,32 @@ namespace _1YearProject
             {
             }
 
-            
             foreach (Collider col in colliders)
             {
-                
+                        
+                    }
+
+
+            
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.inGame || Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.events)
+                    {
+                MainMenu._GameState = GameState.pause;
             }
 
-            cursorRect.X = Mouse.GetState().X-16;
-            cursorRect.Y = Mouse.GetState().Y-16;
-            
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.inGame)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && MainMenu._GameState == GameState.inGame)
             {
-                MainMenu._GameState = GameState.pause;
+                MainMenu._GameState = GameState.events;
+            }
+            
+            else if (Keyboard.GetState().IsKeyDown(Keys.Space) && MainMenu._GameState == GameState.events)
+            {
+                MainMenu._GameState = GameState.inGame;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
-                BuildTower(new Vector2(Mouse.GetState().X,Mouse.GetState().Y));
+                BuildTower(new Vector2(Mouse.GetState().X-16,Mouse.GetState().Y-16));
             }
 
             switch (MainMenu._GameState)
@@ -178,16 +214,32 @@ namespace _1YearProject
                     {
                         obj.Update();
                     }
+
                     break;
+
+                case GameState.events:
+                    foreach (GameObject obj in events)
+                    {
+                        obj.Update();
+                    }
+                    foreach (GameObject obj in inGame)
+                    {
+                        obj.Update();
+                    }
+                    break;
+
+                   
                 default:
                     break;
 
             }
                 //Exit();
                 deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
-            waveManager.Update(gameTime);
+
             // TODO: Add your update logic here
+
             MainMenu.Instance.Update();
+            MiniGames.Instance.Update();
             base.Update(gameTime);
         }
 
@@ -213,8 +265,12 @@ namespace _1YearProject
                     {
                         obj.Draw(spriteBatch);
                     }
-                    level.Draw(spriteBatch);
-                    waveManager.Draw(spriteBatch);
+                    break;
+                case GameState.events:
+                    foreach (GameObject obj in events)
+                    {
+                        obj.Draw(spriteBatch);
+                    }
                     break;
 
                 default:
@@ -223,11 +279,7 @@ namespace _1YearProject
                     // TODO: Add your drawing code here
 
                     MainMenu.Instance.Draw(spriteBatch);
-            if(TowerIcon.Clicked == true)
-            {
-                spriteBatch.Draw(cursorTex, cursorRect, Color.White);
-            }
-            
+          
             spriteBatch.End();
 
             base.Draw(gameTime);

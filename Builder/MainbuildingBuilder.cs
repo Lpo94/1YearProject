@@ -7,10 +7,11 @@ using Microsoft.Xna.Framework;
 using _1YearProject.Components;
 using _1YearProject.Interfaces;
 using _1YearProject.UI;
+using _1YearProject.TowerDefense;
 
-namespace _1YearProject
+namespace _1YearProject.Builder
 {
-    class TextBoxBuilder : IBuilder
+    class MainbuildingBuilder : IBuilder
     {
         private GameObject gameObject;
 
@@ -22,7 +23,14 @@ namespace _1YearProject
         public void BuildGameObject(Vector2 position)
         {
             gameObject = new GameObject();
-            gameObject.AddComponent(new TextBox(gameObject, 300,25, position));
+
+            gameObject.AddComponent(new SpriteRenderer(gameObject, "textboxtar", 1, position));
+
+            gameObject.AddComponent(new Mainbuilding(gameObject, 25, 25, position));
+
+            gameObject.AddComponent(new Animator(gameObject));
+
+            gameObject.AddComponent(new Collider(gameObject));
         }
     }
 }

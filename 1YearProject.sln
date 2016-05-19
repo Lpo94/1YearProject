@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1YearProject", "1YearProjec
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8DEA4FA5-9260-48B3-B722-224F809CE295}"
 	ProjectSection(SolutionItems) = preProject
-		TowerDefense\Tower.cs = TowerDefense\Tower.cs
+		Builder\CursorBuilder.cs = Builder\CursorBuilder.cs
 	EndProjectSection
 EndProject
 Global
