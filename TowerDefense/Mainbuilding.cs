@@ -23,7 +23,6 @@ namespace _1YearProject.TowerDefense
         private Vector2 startPos = Vector2.Zero;
 
         public int lives = 25;
-        public int money = 999;
         public float startHealth;
         public float currentHealth;
 
