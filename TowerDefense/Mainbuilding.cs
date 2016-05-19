@@ -14,50 +14,34 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject.TowerDefense
 {
-    class Mainbuilding : Component, IUpdate, ILoad, ICollisionEnter, ICollisionExit
+    class Mainbuilding : Component, IUpdate, IDraw, ILoad, ICollisionEnter, ICollisionExit
     {
         private Animator animator;
         private Collider collider;
         private Transform transform;
         private SpriteRenderer spriteRenderer;
         private Vector2 startPos = Vector2.Zero;
+        private SpriteFont font;
+        public int Health = 75;
 
-        public int lives = 25;
-        public float startHealth;
-        public float currentHealth;
-
-        public float CurrentHealth
+        public Mainbuilding(GameObject gameObject, int Health, Vector2 startPos) : base(gameObject)
         {
-            get { return currentHealth; }
-            set { currentHealth = value; }
-        }
-        public int Money
-        {
-            get { return Money; }
-            set { Money = value; }
-        }
-        public int Lives
-        {
-            get { return lives; }
-            set { lives = value; }
-        }
-
-        public Mainbuilding(GameObject gameObject, float startHealth, float currentHealth, Vector2 startPos) : base(gameObject)
-        {
-            this.startHealth = startHealth;
-            this.currentHealth = currentHealth;
             transform = gameObject.GetTransform;
             transform.Position = startPos;
         }
         public void Update()
         {
-            
         }
         public void LoadContent(ContentManager content)
         {
+            font = content.Load<SpriteFont>("font");
             this.collider = (Collider)gameObject.GetComponent("Collider");
             this.animator = (Animator)gameObject.GetComponent("Animator");
             CreateAnimations();
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(font, "Health: " + Health, new Vector2(0, 350), Color.Black);
         }
         public void OnCollisionEnter(Collider other)
         {
@@ -72,7 +56,7 @@ namespace _1YearProject.TowerDefense
         }
         public void CreateAnimations()
         {
-            animator.CreateAnimation("Static", new Animation(1, 0, 0, 32, 32, 1, Vector2.Zero));
+            animator.CreateAnimation("Static", new Animation(1, 0, 0, 125, 125, 1, Vector2.Zero));
             animator.PlayAnimation("Static");
         }
     }
