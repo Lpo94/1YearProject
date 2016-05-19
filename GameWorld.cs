@@ -32,9 +32,6 @@ namespace _1YearProject
             set { graphics = value; }
         }
 
-        private Rectangle cursorRect;
-        private Texture2D cursorTex;
-
         // Cursor
         Texture2D cursorTexture;
         Rectangle CursorRectangle;
@@ -77,37 +74,37 @@ namespace _1YearProject
 
             
             Director director = new Director(new TextBoxBuilder());
-            director.Construct(new Vector2 (545, 335));
+            director.Construct(new Vector2 (545, 335),0,0);
             GameObject textBox1 = director.GetGameObject();
-            director.Construct(new Vector2(545, 435));
+            director.Construct(new Vector2(545, 435), 0, 0);
             GameObject textBox2 = director.GetGameObject();
 
             director = new Director(new TowerIconBuilder());
-            director.Construct(new Vector2(100, 100));
+            director.Construct(new Vector2(100, 100), 0, 0);
             GameObject icon = director.GetGameObject();
 
             director = new Director(new PlayerBuilder());
-            director.Construct(new Vector2(400, 400));
+            director.Construct(new Vector2(400, 400), 0, 0);
             GameObject player = director.GetGameObject();
 
             director = new Director(new FruitBuilder());
-            director.Construct(new Vector2(100, 0));
+            director.Construct(new Vector2(100, 0), 0, 0);
             GameObject fruit = director.GetGameObject();
-            director.Construct(new Vector2(100, 0));
+            director.Construct(new Vector2(100, 0), 0, 0);
             GameObject fruit2 = director.GetGameObject();
-            director.Construct(new Vector2(100, 0));
+            director.Construct(new Vector2(100, 0), 0, 0);
             GameObject fruit3 = director.GetGameObject();
 
             director = new Director(new BasketBuilder());
-            director.Construct(new Vector2(0, 950));
+            director.Construct(new Vector2(0, 950), 0, 0);
             GameObject basket = director.GetGameObject();
 
             director = new Director(new CursorBuilder());
-            director.Construct(Vector2.Zero);
+            director.Construct(Vector2.Zero, 0, 0);
             GameObject cursor = director.GetGameObject();
 
             director = new Director(new MainbuildingBuilder());
-            director.Construct(new Vector2(450, 450));
+            director.Construct(new Vector2(450, 450), 0, 0);
             GameObject mainBuilding = director.GetGameObject();
 
             inGame.Add(basket);
@@ -291,14 +288,19 @@ namespace _1YearProject
             if (canBuild == true)
             {
 
-                towerDirector.Construct(pos);
-                GameObject go = towerDirector.GetGameObject();
-                inGame.Add(go);
-                go.LoadContent(Content);
+                towerDirector.Construct(pos, 0, 0);
+                GameObject tower = towerDirector.GetGameObject();
+                inGame.Add(tower);
+                tower.LoadContent(Content);
                 TowerIcon.Clicked = false;
                 canBuild = false;
             }
 
+        }
+
+        internal void CreateBullet(Vector2 pos)
+        {
+            
         }
     }
 }
