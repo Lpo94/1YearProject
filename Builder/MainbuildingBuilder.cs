@@ -24,9 +24,9 @@ namespace _1YearProject.Builder
         {
             gameObject = new GameObject();
 
-            gameObject.AddComponent(new SpriteRenderer(gameObject, "textboxtar", 1, position));
+            gameObject.AddComponent(new SpriteRenderer(gameObject, "tower2", 1, position));
 
-            gameObject.AddComponent(new Mainbuilding(gameObject, 25, 25, position));
+            gameObject.AddComponent(new Mainbuilding(gameObject, 75, position));
 
             gameObject.AddComponent(new Animator(gameObject));
 

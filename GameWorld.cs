@@ -244,7 +244,6 @@ namespace _1YearProject
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-
             switch (MainMenu._GameState)
             {
                 case GameState.loginScreen:
