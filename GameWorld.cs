@@ -23,7 +23,8 @@ namespace _1YearProject
         private List<GameObject> inGame = new List<GameObject>();
         private List<GameObject> events = new List<GameObject>();
         public float deltaTime { get; private set; }
-        private Director towerDirector = new Director(new TowerBuilder());
+        private Director globalDirector = new Director(new TowerBuilder());
+        private Director bulletDirector = new Director(new BulletBuilder());
         public bool canBuild;
 
         public static GraphicsDeviceManager Graphics
@@ -31,14 +32,6 @@ namespace _1YearProject
             get { return graphics; }
             set { graphics = value; }
         }
-
-        private Rectangle cursorRect;
-        private Texture2D cursorTex;
-
-        // Cursor
-        Texture2D cursorTexture;
-        Rectangle CursorRectangle;
-        Color cursorTextureData;
 
         internal static List<Collider> colliders = new List<Collider>();
 
@@ -77,37 +70,37 @@ namespace _1YearProject
 
             
             Director director = new Director(new TextBoxBuilder());
-            director.Construct(new Vector2 (545, 335));
+            director.Construct(new Vector2 (545, 335),0,0);
             GameObject textBox1 = director.GetGameObject();
-            director.Construct(new Vector2(545, 435));
+            director.Construct(new Vector2(545, 435), 0, 0);
             GameObject textBox2 = director.GetGameObject();
 
             director = new Director(new TowerIconBuilder());
-            director.Construct(new Vector2(100, 100));
+            director.Construct(new Vector2(100, 100), 0, 0);
             GameObject icon = director.GetGameObject();
 
             director = new Director(new PlayerBuilder());
-            director.Construct(new Vector2(400, 400));
+            director.Construct(new Vector2(400, 400), 0, 0);
             GameObject player = director.GetGameObject();
 
             director = new Director(new FruitBuilder());
-            director.Construct(new Vector2(100, 0));
+            director.Construct(new Vector2(100, 0), 0, 0);
             GameObject fruit = director.GetGameObject();
-            director.Construct(new Vector2(100, 0));
+            director.Construct(new Vector2(100, 0), 0, 0);
             GameObject fruit2 = director.GetGameObject();
-            director.Construct(new Vector2(100, 0));
+            director.Construct(new Vector2(100, 0), 0, 0);
             GameObject fruit3 = director.GetGameObject();
 
             director = new Director(new BasketBuilder());
-            director.Construct(new Vector2(0, 950));
+            director.Construct(new Vector2(0, 950), 0, 0);
             GameObject basket = director.GetGameObject();
 
             director = new Director(new CursorBuilder());
-            director.Construct(Vector2.Zero);
+            director.Construct(Vector2.Zero, 0, 0);
             GameObject cursor = director.GetGameObject();
 
             director = new Director(new MainbuildingBuilder());
-            director.Construct(new Vector2(450, 450));
+            director.Construct(new Vector2(450, 450), 0, 0);
             GameObject mainBuilding = director.GetGameObject();
 
             inGame.Add(basket);
@@ -290,13 +283,23 @@ namespace _1YearProject
             if (canBuild == true)
             {
 
-                towerDirector.Construct(pos);
-                GameObject go = towerDirector.GetGameObject();
-                inGame.Add(go);
-                go.LoadContent(Content);
+                globalDirector.Construct(pos, 0, 0);
+                GameObject tower = globalDirector.GetGameObject();
+                inGame.Add(tower);
+                tower.LoadContent(Content);
                 TowerIcon.Clicked = false;
                 canBuild = false;
             }
+
+        }
+
+        internal void CreateBullet(Vector2 pos, float speed, float dmg)
+        {
+            
+            bulletDirector.Construct(pos, speed, dmg);
+            GameObject bullet = bulletDirector.GetGameObject();
+            inGame.Add(bullet);
+            bullet.LoadContent(Content);
 
         }
     }

@@ -13,11 +13,11 @@ namespace _1YearProject.Builder
     {
         private GameObject gameObject;
 
-        public void BuildGameObject(Vector2 position)
+        public void BuildGameObject(Vector2 position, float speed, float dmg)
         {
             gameObject = new GameObject();
             gameObject.AddComponent(new SpriteRenderer(gameObject, "Textbox", 1, position));
-            gameObject.AddComponent(new Tower(gameObject,"type",position));
+            gameObject.AddComponent(new Tower(gameObject, "normal", position));
             gameObject.AddComponent(new Animator(gameObject));
             gameObject.AddComponent(new Collider(gameObject));
         }

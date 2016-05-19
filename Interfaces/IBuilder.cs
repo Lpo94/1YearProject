@@ -11,6 +11,6 @@ namespace _1YearProject.Interfaces
     {
         GameObject GetResult();
 
-        void BuildGameObject(Vector2 position);
+        void BuildGameObject(Vector2 position, float speed, float dmg);
     }
 }

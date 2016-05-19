@@ -19,10 +19,10 @@ namespace _1YearProject
             return gameObject;
         }
 
-        public void BuildGameObject(Vector2 position)
+        public void BuildGameObject(Vector2 position, float speed, float dmg)
         {
             gameObject = new GameObject();
-            gameObject.AddComponent(new TextBox(gameObject, 300,25, position));
+            gameObject.AddComponent(new TextBox(gameObject, 300, 25, position));
         }
     }
 }

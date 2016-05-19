@@ -87,7 +87,7 @@ namespace _1YearProject.UI
             else
             {
                 spriteBatch.Draw(clickedTex, textBox, Color.White);
-            }
+            }   
             spriteBatch.DrawString(font, myText, new Vector2(textBox.X+10, textBox.Y+5), Color.Black);
 
         }

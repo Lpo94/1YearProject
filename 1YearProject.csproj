@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Builder\BulletBuilder.cs" />
     <Compile Include="Builder\CursorBuilder.cs" />
     <Compile Include="MiniGames\Fruit game\Basket.cs" />
     <Compile Include="Builder\BasketBuilder.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="TowerDefense\Tower.cs" />
     <Compile Include="TowerDefense\Mainbuilding.cs" />
     <Compile Include="TowerDefense\TowerIcon.cs" />
+    <Compile Include="TowerDefense\TowerShot.cs" />
     <Compile Include="UI\GameLogic.cs" />
     <Compile Include="UI\GUI_Element.cs" />
     <Compile Include="Interfaces\IAnimateable.cs" />
