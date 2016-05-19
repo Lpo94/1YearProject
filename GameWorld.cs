@@ -103,6 +103,7 @@ namespace _1YearProject
             events.Add(fruit3);
             inGame.Add(player);
             inGame.Add(icon);
+            inGame.Add((MouseCursor.Instance.gameObject));
             gameObjects.Add(textBox1);
             gameObjects.Add(textBox2);
 
@@ -117,8 +118,7 @@ namespace _1YearProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cursorTex = Content.Load<Texture2D>("textbox");
-            cursorRect = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 32, 32);
+
 
             foreach (GameObject go in gameObjects)
             {
@@ -160,22 +160,10 @@ namespace _1YearProject
 
             foreach (Collider col in colliders)
             {
-                if (TowerIcon.Clicked == true)
-                {
-                    if (!col.CollisionBox.Intersects(cursorRect))
-                    {
                         
-                        canBuild = true;
                     }
-                    else if(col.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)))
-                    {
-                        canBuild = false;
-                    }
-                }
-            }
 
-            cursorRect.X = Mouse.GetState().X-16;
-            cursorRect.Y = Mouse.GetState().Y-16;
+
             
             
             if (Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.inGame || Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.events)
@@ -212,6 +200,7 @@ namespace _1YearProject
                     {
                         obj.Update();
                     }
+                    MouseCursor.Instance.Update();
                     break;
 
                 case GameState.events:
@@ -219,12 +208,12 @@ namespace _1YearProject
                     {
                         obj.Update();
                     }
-                    foreach(GameObject obj in inGame)
+                    foreach (GameObject obj in inGame)
                     {
                         obj.Update();
                     }
 
-                    break;
+                   
                 default:
                     break;
 
@@ -273,13 +262,8 @@ namespace _1YearProject
             }
                     // TODO: Add your drawing code here
 
-            MainMenu.Instance.Draw(spriteBatch);
-
-
-            if (TowerIcon.Clicked == true)
-            {
-                spriteBatch.Draw(cursorTex, cursorRect, Color.White);
-            }
+                    MainMenu.Instance.Draw(spriteBatch);
+          
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -57,8 +57,9 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="Interfaces\ICollisionExit.cs" />
-    <Compile Include="MiniGames.cs" />
-    <Compile Include="TowerDefense\Tower.cs" />
+	<Compile Include="TowerDefense\MouseCursor.cs" />
+	<Compile Include="MiniGames.cs" />
+	<Compile Include="TowerDefense\Tower.cs" />
     <Compile Include="TowerDefense\TowerIcon.cs" />
     <Compile Include="UI\GameLogic.cs" />
     <Compile Include="UI\GUI_Element.cs" />
