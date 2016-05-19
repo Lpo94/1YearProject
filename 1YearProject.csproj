@@ -43,6 +43,9 @@
     <Compile Include="Builder\TextBoxBuilder.cs" />
     <Compile Include="Builder\TowerBuilder.cs" />
     <Compile Include="Builder\TowerIconBuilder.cs" />
+    <Compile Include="Sprite.cs" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="Components\Animation.cs" />
     <Compile Include="Components\Animator.cs" />
     <Compile Include="Components\Collider.cs" />
@@ -53,6 +56,7 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="Interfaces\ICollisionExit.cs" />
+    <Compile Include="TowerDefense\MouseCursor.cs" />
     <Compile Include="TowerDefense\Tower.cs" />
     <Compile Include="TowerDefense\TowerIcon.cs" />
     <Compile Include="UI\GameLogic.cs" />
@@ -97,7 +101,13 @@
     <Content Include="Content\create.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\enemy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\exit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\grass.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\HeroSheet.png">
@@ -131,6 +141,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\password.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\path.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\pause BG.png">

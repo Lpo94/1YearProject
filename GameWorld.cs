@@ -24,6 +24,10 @@ namespace _1YearProject
         public float deltaTime { get; private set; }
         private Director towerDirector = new Director(new TowerBuilder());
         public bool canBuild;
+        
+        Level level = new Level();
+        Enemy enemy1;
+
 
         private Rectangle cursorRect;
         private Texture2D cursorTex;
@@ -34,7 +38,7 @@ namespace _1YearProject
         Color cursorTextureData;
 
         internal static List<Collider> colliders = new List<Collider>();
-
+        private Texture2D enemyTexture;
 
         public static GameWorld Instance
         {
@@ -109,6 +113,13 @@ namespace _1YearProject
             {
                 go.LoadContent(Content);
             }
+            Texture2D grass = Content.Load<Texture2D>("grass");
+            Texture2D path = Content.Load<Texture2D>("path");
+            level.AddTexture(grass); // 0
+            level.AddTexture(path); // 1
+            Texture2D enemyTexture = Content.Load<Texture2D>("enemy");
+            enemy1 = new Enemy(enemyTexture, new Vector2(184,75), 100, 10, 1.5f);
+            enemy1.SetWaypoints(level.Waypoints); // 
 
             MainMenu.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
@@ -134,20 +145,10 @@ namespace _1YearProject
             {
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.X)) { enemy1 = new Enemy(enemyTexture, new Vector2(184,75), 100, 10, 1.5f); }
             foreach (Collider col in colliders)
             {
-                if (TowerIcon.Clicked == true)
-                {
-                    if (!col.CollisionBox.Intersects(cursorRect))
-                    {
-                        
-                        canBuild = true;
-                    }
-                    else if(col.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)))
-                    {
-                        canBuild = false;
-                    }
-                }
+                
             }
 
             cursorRect.X = Mouse.GetState().X-16;
@@ -185,7 +186,7 @@ namespace _1YearProject
             }
                 //Exit();
                 deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
-
+            enemy1.Update(gameTime);
             // TODO: Add your update logic here
             MainMenu.Instance.Update();
             base.Update(gameTime);
@@ -213,6 +214,8 @@ namespace _1YearProject
                     {
                         obj.Draw(spriteBatch);
                     }
+                    level.Draw(spriteBatch);
+                    enemy1.Draw(spriteBatch);
                     break;
 
                 default:
@@ -225,6 +228,7 @@ namespace _1YearProject
             {
                 spriteBatch.Draw(cursorTex, cursorRect, Color.White);
             }
+            
             spriteBatch.End();
 
             base.Draw(gameTime);
