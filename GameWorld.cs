@@ -27,6 +27,10 @@ namespace _1YearProject
         private Director bulletDirector = new Director(new BulletBuilder());
         public bool canBuild;
 
+        WaveManager waveManager;
+        Level level = new Level();
+        Texture2D enemyTexture;
+
         public static GraphicsDeviceManager Graphics
         {
             get { return graphics; }
@@ -141,6 +145,14 @@ namespace _1YearProject
                 go.LoadContent(Content);
             }
 
+            Texture2D enemyTexture = Content.Load<Texture2D>("enemy");
+            Texture2D grass = Content.Load<Texture2D>("grass");
+            waveManager = new WaveManager(level, 24, enemyTexture);
+
+            Texture2D path = Content.Load<Texture2D>("path");
+            level.AddTexture(grass);
+            level.AddTexture(path);
+
             MainMenu.Instance.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
@@ -230,6 +242,8 @@ namespace _1YearProject
                 deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
 
             // TODO: Add your update logic here
+            waveManager.Update(gameTime);
+            
 
             MainMenu.Instance.Update();
             MiniGames.Instance.Update();
@@ -268,9 +282,10 @@ namespace _1YearProject
                 default:
                     break;
             }
-                    // TODO: Add your drawing code here
-
-                    MainMenu.Instance.Draw(spriteBatch);
+            // TODO: Add your drawing code here
+            waveManager.Draw(spriteBatch);
+            level.Draw(spriteBatch);
+            MainMenu.Instance.Draw(spriteBatch);
           
             spriteBatch.End();
 

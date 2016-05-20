@@ -40,6 +40,8 @@
   <ItemGroup>
     <Compile Include="Builder\BulletBuilder.cs" />
     <Compile Include="Builder\CursorBuilder.cs" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="MiniGames\Fruit game\Basket.cs" />
     <Compile Include="Builder\BasketBuilder.cs" />
     <Compile Include="Builder\Director.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="Interfaces\ICollisionExit.cs" />
+    <Compile Include="Sprite.cs" />
     <Compile Include="TowerDefense\MouseCursor.cs" />
     <Compile Include="MiniGames.cs" />
     <Compile Include="TowerDefense\Tower.cs" />
@@ -80,6 +83,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="UI\TextBox.cs" />
+    <Compile Include="Wave.cs" />
+    <Compile Include="WaveManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -108,7 +113,13 @@
     <Content Include="Content\create.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\enemy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\exit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\grass.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\healthbar.png">
@@ -148,6 +159,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\password.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\path.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\pause BG.png">
