@@ -298,7 +298,7 @@ namespace _1YearProject
             
             bulletDirector.Construct(pos, speed, dmg);
             GameObject bullet = bulletDirector.GetGameObject();
-            inGame.Add(bullet);
+            //inGame.Add(bullet);
             bullet.LoadContent(Content);
 
         }

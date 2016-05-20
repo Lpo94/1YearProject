@@ -13,9 +13,8 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject.TowerDefense
 {
-    class MouseCursor : Component, ILoad, IUpdate, ICollisionExit, ICollisionEnter
+    class MouseCursor:Component,ILoad,IUpdate,ICollisionExit,ICollisionEnter
     {
-
         private Transform transform;
         private Animator animator;
         private Collider collider;
