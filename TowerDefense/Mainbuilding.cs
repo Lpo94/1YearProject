@@ -22,7 +22,7 @@ namespace _1YearProject.TowerDefense
         private SpriteRenderer spriteRenderer;
         private Vector2 startPos = Vector2.Zero;
         private SpriteFont font;
-        public int Health = 75;
+        public static int health = 75;
 
         public Mainbuilding(GameObject gameObject, int Health, Vector2 startPos) : base(gameObject)
         {
@@ -41,12 +41,14 @@ namespace _1YearProject.TowerDefense
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, "Health: " + Health, new Vector2(0, 350), Color.Black);
+            spriteBatch.DrawString(font, "Health: " + health, new Vector2(0, 350), Color.Black);
         }
         public void OnCollisionEnter(Collider other)
         {
             spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
             spriteRenderer.Color = Color.Blue;
+            Mainbuilding.health -= 1;
+            
         }
 
         public void OnCollisionExit(Collider other)

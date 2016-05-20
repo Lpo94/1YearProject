@@ -13,8 +13,19 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject.TowerDefense
 {
-    class MouseCursor:Component,IDraw,ILoad,IUpdate,ICollisionExit,ICollisionEnter
+    class MouseCursor : Component, ILoad, IUpdate, ICollisionExit, ICollisionEnter
     {
+
+        private Transform transform;
+        private Animator animator;
+        private Collider collider;
+
+        public MouseCursor(GameObject gameObject) : base(gameObject)
+        {
+            transform = gameObject.GetTransform;
+
+        }
+
         public void OnCollisionExit(Collider other)
         {
             if (TowerIcon.Clicked == true)
@@ -30,17 +41,22 @@ namespace _1YearProject.TowerDefense
 
         public void Update()
         {
-            throw new NotImplementedException();
+
+            transform.Position = new Vector2(Mouse.GetState().X - 16, Mouse.GetState().Y - 16);
+
         }
 
         public void LoadContent(ContentManager content)
         {
-            throw new NotImplementedException();
+            collider = (Collider)gameObject.GetComponent("Collider");
+            animator = (Animator)gameObject.GetComponent("Animator");
+            CreateAnimations();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void CreateAnimations()
         {
-            throw new NotImplementedException();
+            animator.CreateAnimation("static", new Animation(1, 0, 0, 32, 32, 6, Vector2.Zero));
+            animator.PlayAnimation("static");
         }
     }
 }
