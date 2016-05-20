@@ -50,8 +50,12 @@ namespace _1YearProject.TowerDefense
 
         public void Update()
         {
-            Shoot();
-
+            bool kage = false;
+            if (kage == false)
+            {
+                Shoot();
+                kage = true;
+            }
         }
 
         public void LoadContent(ContentManager content)
@@ -76,7 +80,7 @@ namespace _1YearProject.TowerDefense
         {
             if (atkSpeed <= 0)
             {
-                GameWorld.Instance.CreateBullet(transform.Position, 0.5f, 1);
+                GameWorld.Instance.CreateBullet(new Vector2(transform.Position.X+9,transform.Position.Y), 0.5f, 1);
                 atkSpeed = myAttackSpeed;
             }
             else

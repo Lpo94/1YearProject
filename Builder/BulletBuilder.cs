@@ -18,9 +18,9 @@ namespace _1YearProject.Builder
         {
             gameObject = new GameObject();
 
-            gameObject.AddComponent(new SpriteRenderer(gameObject, "textbox", 1, position));
+            gameObject.AddComponent(new SpriteRenderer(gameObject, "Textbox", 1, position));
 
-            gameObject.AddComponent(new TowerShot(gameObject, dmg, speed));
+            gameObject.AddComponent(new TowerShot(gameObject, dmg, speed, position));
 
             gameObject.AddComponent(new Animator(gameObject));
 

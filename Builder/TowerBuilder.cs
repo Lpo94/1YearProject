@@ -20,6 +20,7 @@ namespace _1YearProject.Builder
             gameObject.AddComponent(new Tower(gameObject, "normal", position));
             gameObject.AddComponent(new Animator(gameObject));
             gameObject.AddComponent(new Collider(gameObject));
+            gameObject.AddComponent(new Transform(gameObject, position));
         }
 
         public GameObject GetResult()

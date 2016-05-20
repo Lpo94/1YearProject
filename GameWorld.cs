@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using _1YearProject.Components;
@@ -22,6 +24,8 @@ namespace _1YearProject
         private List<GameObject> gameObjects = new List<GameObject>();
         private List<GameObject> inGame = new List<GameObject>();
         private List<GameObject> events = new List<GameObject>();
+        private List<GameObject> tempObj = new List<GameObject>();
+        internal List<GameObject> removeObjects = new List<GameObject>();
         public float deltaTime { get; private set; }
         private Director globalDirector = new Director(new TowerBuilder());
         private Director bulletDirector = new Director(new BulletBuilder());
@@ -80,7 +84,7 @@ namespace _1YearProject
             GameObject textBox2 = director.GetGameObject();
 
             director = new Director(new TowerIconBuilder());
-            director.Construct(new Vector2(100, 100), 0, 0);
+            director.Construct(new Vector2(100, 700), 0, 0);
             GameObject icon = director.GetGameObject();
 
             director = new Director(new PlayerBuilder());
@@ -173,18 +177,14 @@ namespace _1YearProject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+
+            foreach (GameObject go in removeObjects)
             {
+                inGame.Remove(go);
             }
 
-            foreach (Collider col in colliders)
-            {
-                        
-                    }
+            removeObjects.Clear();
 
-
-            
-            
             if (Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.inGame || Keyboard.GetState().IsKeyDown(Keys.P) && MainMenu._GameState == GameState.events)
                     {
                 MainMenu._GameState = GameState.pause;
@@ -215,19 +215,23 @@ namespace _1YearProject
                     break;
 
                 case GameState.inGame:
-                    foreach (GameObject obj in inGame)
+                    tempObj = inGame.ToList();
+
+                    foreach (GameObject obj in tempObj)
                     {
                         obj.Update();
                     }
-
+                    waveManager.Update(gameTime);
                     break;
 
                 case GameState.events:
+                    tempObj = inGame.ToList();
+
                     foreach (GameObject obj in events)
                     {
                         obj.Update();
                     }
-                    foreach (GameObject obj in inGame)
+                    foreach (GameObject obj in tempObj)
                     {
                         obj.Update();
                     }
@@ -238,11 +242,12 @@ namespace _1YearProject
                     break;
 
             }
-                //Exit();
-                deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
+            //Exit();
+            
+            deltaTime = (float)gameTime.ElapsedGameTime.Milliseconds;
 
             // TODO: Add your update logic here
-            waveManager.Update(gameTime);
+            
             
 
             MainMenu.Instance.Update();
@@ -267,10 +272,13 @@ namespace _1YearProject
                     }
                     break;
                 case GameState.inGame:
-                    foreach (GameObject obj in inGame)
+                    level.Draw(spriteBatch);
+                    foreach (GameObject obj in tempObj)
                     {
                         obj.Draw(spriteBatch);
                     }
+                    waveManager.Draw(spriteBatch);
+                    
                     break;
                 case GameState.events:
                     foreach (GameObject obj in events)
@@ -283,8 +291,7 @@ namespace _1YearProject
                     break;
             }
             // TODO: Add your drawing code here
-            waveManager.Draw(spriteBatch);
-            level.Draw(spriteBatch);
+           
             MainMenu.Instance.Draw(spriteBatch);
           
             spriteBatch.End();
@@ -313,9 +320,12 @@ namespace _1YearProject
             
             bulletDirector.Construct(pos, speed, dmg);
             GameObject bullet = bulletDirector.GetGameObject();
-            //inGame.Add(bullet);
             bullet.LoadContent(Content);
+            inGame.Add(bullet);
+            
 
         }
+
+
     }
 }

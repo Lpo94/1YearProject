@@ -40,8 +40,8 @@
   <ItemGroup>
     <Compile Include="Builder\BulletBuilder.cs" />
     <Compile Include="Builder\CursorBuilder.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="Level.cs" />
+    <Compile Include="TowerDefense\Enemy.cs" />
+    <Compile Include="TowerDefense\Level.cs" />
     <Compile Include="MiniGames\Fruit game\Basket.cs" />
     <Compile Include="Builder\BasketBuilder.cs" />
     <Compile Include="Builder\Director.cs" />
@@ -83,8 +83,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="UI\TextBox.cs" />
-    <Compile Include="Wave.cs" />
-    <Compile Include="WaveManager.cs" />
+    <Compile Include="TowerDefense\Wave.cs" />
+    <Compile Include="TowerDefense\WaveManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
