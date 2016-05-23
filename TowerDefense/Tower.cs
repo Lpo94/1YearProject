@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject
 {
-    class Tower : Component, IUpdate, ILoad
+    class Tower : Component, IUpdate, ILoad, IDraw
     {
 
         private Transform transform;
@@ -27,7 +27,8 @@ namespace _1YearProject
             get { return upgDMG; }
             set { upgDMG = value; }
         }
-
+        private List<GameObject> myTargets;
+        private GameObject tar;
         public float upgSpeed { get; set; }
         public bool Clicked { get; set; }
         public float Dmg { get; set; }
@@ -36,11 +37,16 @@ namespace _1YearProject
         public float Range { get; set; }
         public string Type { get; set; }
         public int Price { get; set; }
+        private SpriteFont font;
+
+        public static bool towerClicked = false;
+        private bool clicked = false;
+
 
         public Tower(GameObject gameObject, string type, Vector2 pos) : base(gameObject)
         {
             this.Type = type;
-
+            myTargets = new List<GameObject>();
             transform = gameObject.GetTransform;
             switch (type)
             {
@@ -48,7 +54,7 @@ namespace _1YearProject
                     Dmg = 1;
                     atkSpeed = 500;
                     myAttackSpeed = atkSpeed;
-                    Range = 3;
+                    Range = 3000;
                     Price = 100;
                     break;
             }
@@ -58,22 +64,39 @@ namespace _1YearProject
 
         public void Update()
         {
-            bool kage = false;
-            if (kage == false)
+            if (collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
-                Shoot();
-                kage = true;
+                clicked = true;
+                towerClicked = true;
+            }
+            else if (!collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                clicked = false;
+                towerClicked = false;
             }
 
-            if(upgDMG == true && upgSpeed <= 0)
+            foreach(GameObject go in GameWorld.Instance.tempObj)
+            {
+                if (go.CheckComponent("TowerIcon") == true)
+                {
+                    if (Vector2.Distance(go.GetTransform.Position, transform.Position) < Range)
+            {
+                        myTargets.Add(go);
+                    }
+                }
+            }
+            if (upgDMG == true && upgSpeed <= 0)
             {
                 UPGDamage();
                 upgDMG = false;
             }
+            myTargets.Sort();
+            Shoot(tar);
         }
 
         public void LoadContent(ContentManager content)
-        {
+        {            
+            font = content.Load<SpriteFont>("font");
             this.collider = (Collider)gameObject.GetComponent("Collider");
             this.animator = (Animator)gameObject.GetComponent("Animator");
             CreateAnimations();
@@ -87,14 +110,17 @@ namespace _1YearProject
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            if (clicked == true)
+            {
+                spriteBatch.DrawString(font, "Attack DMG " + Dmg + "\n Attack Speed " + myAttackSpeed/1000 + "\n Range " + Range, new Vector2(50, 650), Color.Pink);
+            }
         }
 
-        public void Shoot()
+        public void Shoot(GameObject tar)
         {
             if (atkSpeed <= 0)
             {
-                GameWorld.Instance.CreateBullet(new Vector2(transform.Position.X + 9, transform.Position.Y), 0.5f, 1);
+                GameWorld.Instance.CreateBullet(new Vector2(transform.Position.X + 9, transform.Position.Y), 0.5f, 1, tar);
                 atkSpeed = myAttackSpeed;
             }
             else

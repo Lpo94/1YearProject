@@ -87,6 +87,15 @@ namespace _1YearProject
             return components.Find(x => x.GetType().Name == component);
         }
 
+        public bool CheckComponent(string component)
+        {
+            if (GetComponent(component) != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void OnAnimationDone(string animationName)
         {
             foreach (Component component in components)

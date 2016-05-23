@@ -18,9 +18,9 @@ namespace _1YearProject.Builder
             this.builder = builder;
         }
 
-        public void Construct(Vector2 pos, float speed, float dmg)
+        public void Construct(Vector2 pos, float speed, float dmg, GameObject enemy)
         {
-            builder.BuildGameObject(pos,speed,dmg);
+            builder.BuildGameObject(pos,speed,dmg, enemy);
         }
 
         public GameObject GetGameObject()
