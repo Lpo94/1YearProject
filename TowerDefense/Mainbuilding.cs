@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 
-namespace _1YearProject.TowerDefense
+namespace _1YearProject
 {
     class Mainbuilding : Component, IUpdate, IDraw, ILoad, ICollisionEnter, ICollisionExit
     {
@@ -23,6 +23,13 @@ namespace _1YearProject.TowerDefense
         private Vector2 startPos = Vector2.Zero;
         private SpriteFont font;
         public static int health = 75;
+        private static int gold = 110;
+
+        public static int Gold
+        {
+            get { return gold; }
+            set { gold = value; }
+        }
 
         public Mainbuilding(GameObject gameObject, int Health, Vector2 startPos) : base(gameObject)
         {
@@ -41,13 +48,14 @@ namespace _1YearProject.TowerDefense
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, "Health: " + health, new Vector2(0, 350), Color.Black);
+            spriteBatch.DrawString(font, "Health: " + health, new Vector2(450, 50), Color.Red);
+            spriteBatch.DrawString(font, "Gold: " + gold, new Vector2(250, 50), Color.Gold);
         }
         public void OnCollisionEnter(Collider other)
         {
             spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
             spriteRenderer.Color = Color.Blue;
-            Mainbuilding.health -= 1;
+            health -= 1;
             
         }
 

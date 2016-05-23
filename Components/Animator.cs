@@ -72,10 +72,5 @@ namespace _1YearProject.Components
 
             }
         }
-        
-        public void myAnimation()
-        {
-            
-        }
     }
 }

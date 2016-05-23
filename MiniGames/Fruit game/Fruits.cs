@@ -38,7 +38,6 @@ namespace _1YearProject
         public void OnCollisionEnter(Collider other)
         {
             MiniGames.Points += 1;
-
             transform.Position = new Vector2(r.Next(0, 1350), 0);
         }
 

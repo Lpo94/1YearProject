@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using _1YearProject.Components;
 using _1YearProject.Builder;
 using _1YearProject.TowerDefense;
-using System.Collections.Generic;
+
 
 namespace _1YearProject
 {
@@ -30,6 +30,7 @@ namespace _1YearProject
         private Director globalDirector = new Director(new TowerBuilder());
         private Director bulletDirector = new Director(new BulletBuilder());
         public bool canBuild;
+
 
         WaveManager waveManager;
         Level level = new Level();
@@ -87,17 +88,29 @@ namespace _1YearProject
             director.Construct(new Vector2(100, 700), 0, 0);
             GameObject icon = director.GetGameObject();
 
+            director = new Director(new UpgradeIconBuilder());
+            director.Construct(new Vector2(100, 800), 0, 0);
+            GameObject upgIcon = director.GetGameObject();
+
             director = new Director(new PlayerBuilder());
             director.Construct(new Vector2(400, 400), 0, 0);
             GameObject player = director.GetGameObject();
 
-            director = new Director(new FruitBuilder());
+          /* director = new Director(new FruitBuilder());
             director.Construct(new Vector2(100, 0), 0, 0);
             GameObject fruit = director.GetGameObject();
             director.Construct(new Vector2(100, 0), 0, 0);
             GameObject fruit2 = director.GetGameObject();
             director.Construct(new Vector2(100, 0), 0, 0);
-            GameObject fruit3 = director.GetGameObject();
+            GameObject fruit3 = director.GetGameObject();*/
+
+            director = new Director(new DodgeEnemyBuilder());
+            director.Construct(new Vector2(100, 0), 0, 0);
+            GameObject Dodge = director.GetGameObject();
+            director.Construct(new Vector2(200, 0), 0, 0);
+            GameObject Dodge2 = director.GetGameObject();
+            director.Construct(new Vector2(300, 0), 0, 0);
+            GameObject Dodge3 = director.GetGameObject();
 
             director = new Director(new BasketBuilder());
             director.Construct(new Vector2(0, 950), 0, 0);
@@ -111,10 +124,14 @@ namespace _1YearProject
             director.Construct(new Vector2(450, 450), 0, 0);
             GameObject mainBuilding = director.GetGameObject();
 
-            inGame.Add(basket);
-            events.Add(fruit);
+            inGame.Add(upgIcon);
+            events.Add(basket);
+            events.Add(Dodge);
+            events.Add(Dodge2);
+            events.Add(Dodge3);
+           /* events.Add(fruit);
             events.Add(fruit2);
-            events.Add(fruit3);
+            events.Add(fruit3);*/
             inGame.Add(player);
             inGame.Add(icon);
             inGame.Add(mainBuilding);
@@ -302,7 +319,7 @@ namespace _1YearProject
 
         internal void BuildTower(Vector2 pos)
         {
-            if (canBuild == true)
+            if (canBuild == true && Mainbuilding.Gold >= 10)
             {
 
                 globalDirector.Construct(pos, 0, 0);
@@ -311,6 +328,7 @@ namespace _1YearProject
                 tower.LoadContent(Content);
                 TowerIcon.Clicked = false;
                 canBuild = false;
+                Mainbuilding.Gold -= 10;
             }
 
         }

@@ -16,7 +16,7 @@ namespace _1YearProject
     {
         private List<Fruits> minigame1 = new List<Fruits>();
         private List<GameObject> minigame2 = new List<GameObject>();
-        private int minigameNumber = 1;
+        private int minigameNumber = 2;
         static MiniGames instance;
 
         private static int points;
@@ -57,6 +57,11 @@ namespace _1YearProject
 
         public void Update()
         {
+            if(points >= 10)
+            {
+                Mainbuilding.Gold += 100;
+                points = 0;
+            }
             switch (minigameNumber)
             {
                 case 1:
