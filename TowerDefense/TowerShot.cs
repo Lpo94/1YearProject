@@ -24,7 +24,7 @@ namespace _1YearProject.TowerDefense
         private Collider collider;
 
 
-        public TowerShot(GameObject gameObject, float dmg, float speed, Vector2 pos) : base(gameObject)
+        public TowerShot(GameObject gameObject, float dmg, float speed, Vector2 pos, GameObject enemy) : base(gameObject)
         {
             this.dmg = dmg;
             this.speed = speed;
@@ -41,15 +41,16 @@ namespace _1YearProject.TowerDefense
 
         public void Update()
         {
-            Vector2 translation = Vector2.Zero;
-            translation += new Vector2(0, -1);
+            Vector2 dir = transform.Position - new Vector2(500, 500);
+            dir.Normalize();
             if (liveTime <= 0)
             {
                 GameWorld.Instance.removeObjects.Add(gameObject);
             }
             else
                 liveTime -= GameWorld.Instance.deltaTime;
-            gameObject.GetTransform.Translate(translation * speed * GameWorld.Instance.deltaTime);
+
+            gameObject.GetTransform.Translate(dir * speed * GameWorld.Instance.deltaTime);
         }
 
         public void CreateAnimations()

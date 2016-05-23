@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using _1YearProject.Components;
 using _1YearProject.Builder;
 using _1YearProject.TowerDefense;
-using System.Collections.Generic;
+
 
 namespace _1YearProject
 {
@@ -24,8 +24,10 @@ namespace _1YearProject
         private List<GameObject> gameObjects = new List<GameObject>();
         private List<GameObject> inGame = new List<GameObject>();
         private List<GameObject> events = new List<GameObject>();
-        private List<GameObject> tempObj = new List<GameObject>();
+        internal List<GameObject> tempObj = new List<GameObject>();
+        private List<GameObject> miniTempObj = new List<GameObject>();
         internal List<GameObject> removeObjects = new List<GameObject>();
+
         public float deltaTime { get; private set; }
         private Director globalDirector = new Director(new TowerBuilder());
         private Director bulletDirector = new Director(new BulletBuilder());
@@ -78,37 +80,37 @@ namespace _1YearProject
 
             
             Director director = new Director(new TextBoxBuilder());
-            director.Construct(new Vector2 (545, 335),0,0);
+            director.Construct(new Vector2 (545, 335),0,0,null);
             GameObject textBox1 = director.GetGameObject();
-            director.Construct(new Vector2(545, 435), 0, 0);
+            director.Construct(new Vector2(545, 435), 0, 0, null);
             GameObject textBox2 = director.GetGameObject();
 
             director = new Director(new TowerIconBuilder());
-            director.Construct(new Vector2(100, 700), 0, 0);
+            director.Construct(new Vector2(100, 700), 0, 0, null);
             GameObject icon = director.GetGameObject();
 
             director = new Director(new PlayerBuilder());
-            director.Construct(new Vector2(400, 400), 0, 0);
+            director.Construct(new Vector2(400, 400), 0, 0, null);
             GameObject player = director.GetGameObject();
 
             director = new Director(new FruitBuilder());
-            director.Construct(new Vector2(100, 0), 0, 0);
+            director.Construct(new Vector2(100, 0), 0, 0, null);
             GameObject fruit = director.GetGameObject();
-            director.Construct(new Vector2(100, 0), 0, 0);
+            director.Construct(new Vector2(100, 0), 0, 0, null);
             GameObject fruit2 = director.GetGameObject();
-            director.Construct(new Vector2(100, 0), 0, 0);
+            director.Construct(new Vector2(100, 0), 0, 0, null);
             GameObject fruit3 = director.GetGameObject();
 
             director = new Director(new BasketBuilder());
-            director.Construct(new Vector2(0, 950), 0, 0);
+            director.Construct(new Vector2(0, 950), 0, 0, null);
             GameObject basket = director.GetGameObject();
 
             director = new Director(new CursorBuilder());
-            director.Construct(Vector2.Zero, 0, 0);
+            director.Construct(Vector2.Zero, 0, 0, null);
             GameObject cursor = director.GetGameObject();
 
             director = new Director(new MainbuildingBuilder());
-            director.Construct(new Vector2(450, 450), 0, 0);
+            director.Construct(new Vector2(450, 450), 0, 0, null);
             GameObject mainBuilding = director.GetGameObject();
 
             inGame.Add(basket);
@@ -226,8 +228,9 @@ namespace _1YearProject
 
                 case GameState.events:
                     tempObj = inGame.ToList();
+                    miniTempObj = events.ToList();
 
-                    foreach (GameObject obj in events)
+                    foreach (GameObject obj in miniTempObj)
                     {
                         obj.Update();
                     }
@@ -305,7 +308,7 @@ namespace _1YearProject
             if (canBuild == true)
             {
 
-                globalDirector.Construct(pos, 0, 0);
+                globalDirector.Construct(pos, 0, 0, null);
                 GameObject tower = globalDirector.GetGameObject();
                 inGame.Add(tower);
                 tower.LoadContent(Content);
@@ -315,10 +318,10 @@ namespace _1YearProject
 
         }
 
-        internal void CreateBullet(Vector2 pos, float speed, float dmg)
+        internal void CreateBullet(Vector2 pos, float speed, float dmg, GameObject enemy)
         {
             
-            bulletDirector.Construct(pos, speed, dmg);
+            bulletDirector.Construct(pos, speed, dmg, enemy);
             GameObject bullet = bulletDirector.GetGameObject();
             bullet.LoadContent(Content);
             inGame.Add(bullet);

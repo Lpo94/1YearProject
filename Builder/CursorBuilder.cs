@@ -16,7 +16,7 @@ namespace _1YearProject.Builder
         private GameObject gameObject;
 
 
-        public void BuildGameObject(Vector2 position, float speed, float dmg)
+        public void BuildGameObject(Vector2 position, float speed, float dmg,GameObject enemy)
         {
             gameObject = new GameObject();
             gameObject.AddComponent(new Transform(gameObject, Vector2.Zero));

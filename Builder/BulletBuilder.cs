@@ -14,13 +14,13 @@ namespace _1YearProject.Builder
     {
         private GameObject gameObject;
 
-        public void BuildGameObject(Vector2 position, float speed, float dmg)
+        public void BuildGameObject(Vector2 position, float speed, float dmg, GameObject enemy)
         {
             gameObject = new GameObject();
 
             gameObject.AddComponent(new SpriteRenderer(gameObject, "Textbox", 1, position));
 
-            gameObject.AddComponent(new TowerShot(gameObject, dmg, speed, position));
+            gameObject.AddComponent(new TowerShot(gameObject, dmg, speed, position, enemy));
 
             gameObject.AddComponent(new Animator(gameObject));
 

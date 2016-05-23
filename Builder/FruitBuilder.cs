@@ -19,7 +19,7 @@ namespace _1YearProject
             return gameObject;
         }
 
-        public void BuildGameObject(Vector2 position, float speed, float dmg)
+        public void BuildGameObject(Vector2 position, float speed, float dmg,GameObject enemy)
         {
             gameObject = new GameObject();
 

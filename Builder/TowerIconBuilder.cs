@@ -20,7 +20,7 @@ namespace _1YearProject.Builder
             return gameObject;
         }
 
-        public void BuildGameObject(Vector2 position, float speed, float dmg)
+        public void BuildGameObject(Vector2 position, float speed, float dmg, GameObject enemy)
         {
             gameObject = new GameObject();
             gameObject.AddComponent(new SpriteRenderer(gameObject, "textbox", 1, position));
