@@ -56,7 +56,6 @@ namespace _1YearProject
             spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
             spriteRenderer.Color = Color.Blue;
             health -= 1;
-            
         }
 
         public void OnCollisionExit(Collider other)

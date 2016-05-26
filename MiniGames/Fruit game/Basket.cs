@@ -43,6 +43,8 @@ namespace _1YearProject
 
             Vector2 translation = Vector2.Zero;
             KeyboardState keyState = Keyboard.GetState();
+            if (MiniGames.MiniGameNumber == 1)
+            {
                 if (MainMenu._GameState == GameState.events && keyState.IsKeyDown(Keys.A) && transform.Position.X > 0)
                 {
                     translation += new Vector2(-1, 0);
@@ -51,7 +53,27 @@ namespace _1YearProject
                 {
                     translation += new Vector2(1, 0);
                 }
-                gameObject.GetTransform.Translate(translation * speed * GameWorld.Instance.deltaTime);
+            }
+            if (MiniGames.MiniGameNumber == 2)
+            {
+                if (MainMenu._GameState == GameState.events && keyState.IsKeyDown(Keys.A) && transform.Position.X > 0)
+                {
+                    translation += new Vector2(-1, 0);
+                }
+                else if (MainMenu._GameState == GameState.events && keyState.IsKeyDown(Keys.D) && transform.Position.X < 1360)
+                {
+                    translation += new Vector2(1, 0);
+                }
+                else if (MainMenu._GameState == GameState.events && keyState.IsKeyDown(Keys.W) && transform.Position.Y > 40)
+                {
+                    translation += new Vector2(0, -1);
+                }
+                else if (MainMenu._GameState == GameState.events && keyState.IsKeyDown(Keys.S) && transform.Position.Y < 960)
+                {
+                    translation += new Vector2(0, 1);
+                }
+            }
+            gameObject.GetTransform.Translate(translation * speed * GameWorld.Instance.deltaTime);
         }
 
         public void CreateAnimations()

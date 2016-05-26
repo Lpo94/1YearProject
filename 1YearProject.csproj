@@ -41,6 +41,8 @@
     <Compile Include="Builder\BulletBuilder.cs" />
     <Compile Include="Builder\CursorBuilder.cs" />
     <Compile Include="Builder\DodgeEnemyBuilder.cs" />
+    <Compile Include="ButtonBuilder.cs" />
+    <Compile Include="MiniGames\Press the button\Button.cs" />
     <Compile Include="MiniGames\Dogde game\Dodge Enemy.cs" />
     <Compile Include="TowerDefense\Enemy.cs" />
     <Compile Include="TowerDefense\Level.cs" />
@@ -118,6 +120,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\enemy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Event BG.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\exit.png">

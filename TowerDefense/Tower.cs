@@ -129,10 +129,10 @@ namespace _1YearProject
 
         public void UPGDamage()
         {
-            if(Mainbuilding.Gold >= Price)
+            if(Mainbuilding.Gold >= 10)
             {
                 Dmg += 2;
-                Mainbuilding.Gold -= Price;
+                Mainbuilding.Gold -= 10;
             }
         }
     }
