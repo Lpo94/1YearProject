@@ -18,6 +18,7 @@ namespace _1YearProject
         private static List<GUIElement> howTo = new List<GUIElement>();
         private static List<GUIElement> highscore = new List<GUIElement>();
         private static List<GUIElement> inGame = new List<GUIElement>();
+        private static List<GUIElement> events = new List<GUIElement>();
         private static List<GUIElement> pause = new List<GUIElement>();
         static MainMenu instance;
 
@@ -58,6 +59,8 @@ namespace _1YearProject
 
             inGame.Add(new GUIElement("ingame BG"));
 
+            events.Add(new GUIElement("event BG"));
+
             pause.Add(new GUIElement("pause BG"));
             pause.Add(new GUIElement("continue"));
             pause.Add(new GUIElement("save"));
@@ -92,6 +95,13 @@ namespace _1YearProject
             main.Find(x => x.AssetName == "exit").MoveElement(0, 225);
 
             foreach (GUIElement element in inGame)
+            {
+                element.LoadContent(content);
+                element.CenterElement(1000, 1400);
+                element.clickEvent += OnClick;
+            }
+
+            foreach (GUIElement element in events)
             {
                 element.LoadContent(content);
                 element.CenterElement(1000, 1400);
@@ -134,6 +144,13 @@ namespace _1YearProject
                     }
                     break;
 
+                case GameState.events:
+                    foreach (GUIElement element in events)
+                    {
+                        element.Update();
+                    }
+                    break;
+
                 case GameState.pause:
                     foreach (GUIElement element in pause)
                     {
@@ -166,6 +183,13 @@ namespace _1YearProject
 
                 case GameState.inGame:
                     foreach (GUIElement element in inGame)
+                    {
+                        element.Draw(spriteBatch);
+                    }
+                    break;
+
+                case GameState.events:
+                    foreach (GUIElement element in events)
                     {
                         element.Draw(spriteBatch);
                     }

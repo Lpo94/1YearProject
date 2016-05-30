@@ -19,6 +19,7 @@ namespace _1YearProject
     {
         private SpriteRenderer spriteRenderer;
         private static GraphicsDeviceManager graphics;
+        private float changeTime = 150;
         SpriteBatch spriteBatch;
         static GameWorld instance;
         private List<GameObject> gameObjects = new List<GameObject>();
@@ -72,7 +73,6 @@ namespace _1YearProject
             graphics.PreferredBackBufferHeight = 1000;
             graphics.PreferredBackBufferWidth = 1400;
             IsMouseVisible = true;
-            
         }
 
         /// <summary>
@@ -105,22 +105,26 @@ namespace _1YearProject
             GameObject player = director.GetGameObject();
 
 
-            /* director = new Director(new FruitBuilder());
-            director.Construct(new Vector2(100, 0), 0, 0);
+            /*director = new Director(new FruitBuilder());
+            director.Construct(new Vector2(100, 0), 0, 0, null);
             GameObject fruit = director.GetGameObject();
             director.Construct(new Vector2(100, 0), 0, 0, null);
             GameObject fruit2 = director.GetGameObject();
-            director.Construct(new Vector2(100, 0), 0, 0);
+            director.Construct(new Vector2(100, 0), 0, 0, null);
             GameObject fruit3 = director.GetGameObject(); */
 
-            director = new Director(new DodgeEnemyBuilder());
-            director.Construct(new Vector2(100, 0), 0, 0, null);
+            /*director = new Director(new DodgeEnemyBuilder());
+            director.Construct(new Vector2(100, 30), 0, 0, null);
             GameObject Dodge = director.GetGameObject();
-            director.Construct(new Vector2(200, 0), 0, 0, null);
+            director.Construct(new Vector2(200, 30), 0, 0, null);
             GameObject Dodge2 = director.GetGameObject();
-            director.Construct(new Vector2(300, 0), 0, 0, null);
-            GameObject Dodge3 = director.GetGameObject();
+            director.Construct(new Vector2(300, 30), 0, 0, null);
+            GameObject Dodge3 = director.GetGameObject();*/
 
+
+            director = new Director(new ButtonBuilder());
+            director.Construct(new Vector2(500, 450), 0, 0, null);
+            GameObject button = director.GetGameObject();
 
             director = new Director(new BasketBuilder());
             director.Construct(new Vector2(0, 950), 0, 0, null);
@@ -137,12 +141,13 @@ namespace _1YearProject
             upgMenu.Add(upgIcon);
 
             events.Add(basket);
-            events.Add(Dodge);
+            /*events.Add(Dodge);
             events.Add(Dodge2);
-            events.Add(Dodge3);
-           /* events.Add(fruit);
+            events.Add(Dodge3);/*
+            events.Add(fruit);
             events.Add(fruit2);
             events.Add(fruit3);*/
+            events.Add(button);
             inGame.Add(player);
 
             towerBuilder.Add(icon);
@@ -230,16 +235,21 @@ namespace _1YearProject
                     {
                 MainMenu._GameState = GameState.pause;
             }
-
+            if (changeTime <= 0)
+            {
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && MainMenu._GameState == GameState.inGame)
             {
                 MainMenu._GameState = GameState.events;
+                    changeTime = 150;
             }
             
             else if (Keyboard.GetState().IsKeyDown(Keys.Space) && MainMenu._GameState == GameState.events)
             {
                 MainMenu._GameState = GameState.inGame;
+                    changeTime = 150;
+                }
             }
+            changeTime -= deltaTime;
 
             
             if (Keyboard.GetState().IsKeyDown(Keys.M))
@@ -400,12 +410,7 @@ namespace _1YearProject
             GameObject bullet = bulletDirector.GetGameObject();
             bullet.LoadContent(Content);
             inGame.Add(bullet);
-            
-
         }
-
-
-
 
     }
 }

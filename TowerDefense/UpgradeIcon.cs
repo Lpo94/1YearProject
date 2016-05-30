@@ -18,7 +18,8 @@ namespace _1YearProject
         private Transform transform;
         private Collider collider;
         private Animator animator;
-        private Tower tower;
+        private float upgradeTime = 150;
+        
 
         public static bool Clicked { get; set; }
 
@@ -39,15 +40,21 @@ namespace _1YearProject
 
         public void Update()
         {
-            if (collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (upgradeTime <= 0)
             {
-                Clicked = true;
-                Tower.UpgDMG = true;
+                if (collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    Clicked = true;
+                    Tower.UpgDMG = true;
+                    upgradeTime = 150;
+                }
+                else if (!collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    Clicked = false;
+                }
             }
-            else if (!collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                Clicked = false;
-            }
+            else
+                upgradeTime -= GameWorld.Instance.deltaTime;
         }
 
         public void CreateAnimations()

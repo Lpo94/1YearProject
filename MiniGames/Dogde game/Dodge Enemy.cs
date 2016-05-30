@@ -12,25 +12,29 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace _1YearProject
 {
-    class Dodge_Enemy : Component, IUpdate, ILoad, ICollisionEnter
+    class Dodge_Enemy : Component, IUpdate, ILoad, ICollisionEnter, IDraw
     {
         private Animator animator;
         private Collider collider;
         private Transform transform;
-        private float speed = 0.5f;
+        private float speed = 1f;
         private Vector2 startPos = Vector2.Zero;
         private Random r = new Random();
+        private Random r2 = new Random();
+        private Random r3 = new Random();
         private int movement = 1;
+        private SpriteFont font;
 
 
-        public Dodge_Enemy(GameObject gameObject) : base(gameObject)
+        public Dodge_Enemy(GameObject gameObject, Vector2 pos) : base(gameObject)
         {
             transform = gameObject.GetTransform;
-            transform.Position = startPos;
+            transform.Position = pos;
         }
 
         public void LoadContent(ContentManager content)
         {
+            font = content.Load<SpriteFont>("font");
             this.animator = (Animator)gameObject.GetComponent("Animator");
             this.collider = (Collider)gameObject.GetComponent("Collider");
             CreateAnimations();
@@ -38,7 +42,7 @@ namespace _1YearProject
 
         public void OnCollisionEnter(Collider other)
         {
-
+            GameWorld.Instance.removeObjects.Add(gameObject);
         }
 
         public void Update()
@@ -49,7 +53,7 @@ namespace _1YearProject
                 movement = 3;
                 transform.Position = new Vector2(5, r.Next(5, 950));
             }
-            if (transform.Position.Y < 0)
+            if (transform.Position.Y < 30)
             {
                 movement = 4;
                 transform.Position = new Vector2(1350, r.Next(5, 950));
@@ -62,7 +66,7 @@ namespace _1YearProject
             if (transform.Position.X < 0)
             {
                 movement = 1;
-                transform.Position = new Vector2(r.Next(5, 1350), 5);
+                transform.Position = new Vector2(r.Next(5, 1350), 30);
             }
 
             if (MainMenu._GameState == GameState.events && movement == 1)
@@ -86,8 +90,14 @@ namespace _1YearProject
 
         public void CreateAnimations()
         {
-            animator.CreateAnimation("static", new Animation(1, 0, 0, 32, 32, 1, Vector2.Zero));
+            animator.CreateAnimation("static", new Animation(1, 0, 0, 44, 42, 1, Vector2.Zero));
             animator.PlayAnimation("static");
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(font, "Required points to win: " + MiniGames.Points, new Vector2(450, 5), Color.Black);
+            spriteBatch.DrawString(font, "Points: " + MiniGames.Points, new Vector2(50, 5), Color.Black);
         }
     }
 }

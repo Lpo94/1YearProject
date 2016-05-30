@@ -12,12 +12,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace _1YearProject
 {
-    class MiniGames : Component, IUpdate, ILoad
+    class MiniGames : Component, IUpdate, ILoad, IDraw
     {
         private List<Fruits> minigame1 = new List<Fruits>();
         private List<GameObject> minigame2 = new List<GameObject>();
-        private int minigameNumber = 2;
         static MiniGames instance;
+        private SpriteFont font;
+        private static int miniGameNumber = 2;
 
         private static int points;
 
@@ -25,6 +26,12 @@ namespace _1YearProject
         {
             get { return points; }
             set { points = value; }
+        }
+
+        public static int MiniGameNumber
+        {
+            get { return miniGameNumber; }
+            set { miniGameNumber = value; }
         }
 
         public static MiniGames Instance
@@ -43,6 +50,7 @@ namespace _1YearProject
 
         public void LoadContent(ContentManager content)
         {
+            font = content.Load<SpriteFont>("font");
             foreach (Fruits go in minigame1)
             {
                 go.LoadContent(content);
@@ -62,7 +70,7 @@ namespace _1YearProject
                 Mainbuilding.Gold += 100;
                 points = 0;
             }
-            switch (minigameNumber)
+            switch (miniGameNumber)
             {
                 case 1:
                     foreach (Fruits go in minigame1)
@@ -81,6 +89,11 @@ namespace _1YearProject
                 default:
                     break;
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+
         }
     }
 }
