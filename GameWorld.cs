@@ -39,6 +39,7 @@ namespace _1YearProject
         private Director globalDirector = new Director(new TowerBuilder());
         private Director bulletDirector = new Director(new BulletBuilder());
         public bool canBuild;
+        DB db = new DB();
 
 
         WaveManager waveManager;
