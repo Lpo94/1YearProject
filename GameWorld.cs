@@ -22,10 +22,16 @@ namespace _1YearProject
         SpriteBatch spriteBatch;
         static GameWorld instance;
         private List<GameObject> gameObjects = new List<GameObject>();
-        private List<GameObject> inGame = new List<GameObject>();
-        private List<GameObject> events = new List<GameObject>();
+
+        internal List<GameObject> inGame = new List<GameObject>();
         internal List<GameObject> tempObj = new List<GameObject>();
+
+        internal List<GameObject> upgMenu = new List<GameObject>();
+        internal List<GameObject> towerBuilder = new List<GameObject>();
+
+        private List<GameObject> events = new List<GameObject>();
         private List<GameObject> miniTempObj = new List<GameObject>();
+
         internal List<GameObject> removeObjects = new List<GameObject>();
 
         public float deltaTime { get; private set; }
@@ -128,7 +134,8 @@ namespace _1YearProject
             director.Construct(new Vector2(450, 450), 0, 0, null);
             GameObject mainBuilding = director.GetGameObject();
 
-            inGame.Add(upgIcon);
+            upgMenu.Add(upgIcon);
+
             events.Add(basket);
             events.Add(Dodge);
             events.Add(Dodge2);
@@ -137,7 +144,9 @@ namespace _1YearProject
             events.Add(fruit2);
             events.Add(fruit3);*/
             inGame.Add(player);
-            inGame.Add(icon);
+
+            towerBuilder.Add(icon);
+
             inGame.Add(mainBuilding);
             inGame.Add(cursor);
             gameObjects.Add(textBox1);
@@ -166,6 +175,16 @@ namespace _1YearProject
             }
 
             foreach (GameObject go in events)
+            {
+                go.LoadContent(Content);
+            }
+
+            foreach (GameObject go in towerBuilder)
+            {
+                go.LoadContent(Content);   
+            }
+
+            foreach (GameObject go in upgMenu)
             {
                 go.LoadContent(Content);
             }
@@ -202,6 +221,7 @@ namespace _1YearProject
             foreach (GameObject go in removeObjects)
             {
                 inGame.Remove(go);
+                events.Remove(go);
             }
 
             removeObjects.Clear();
@@ -221,6 +241,7 @@ namespace _1YearProject
                 MainMenu._GameState = GameState.inGame;
             }
 
+            
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
                 BuildTower(new Vector2(Mouse.GetState().X-16,Mouse.GetState().Y-16));
@@ -229,6 +250,7 @@ namespace _1YearProject
             switch (MainMenu._GameState)
             {
                 case GameState.loginScreen:
+
                     foreach (GameObject obj in gameObjects)
                     {
                         obj.Update();
@@ -236,16 +258,33 @@ namespace _1YearProject
                     break;
 
                 case GameState.inGame:
+
                     tempObj = inGame.ToList();
 
                     foreach (GameObject obj in tempObj)
                     {
                         obj.Update();
                     }
+
+                    if (Tower.towerClicked == false)
+                    {
+                        foreach (GameObject go in towerBuilder)
+                        {
+                            go.Update();
+                        }
+                    }
+                    else
+                    {
+                        foreach (GameObject go in upgMenu)
+                        {
+                            go.Update();
+                        }
+                    }
                     waveManager.Update(gameTime);
                     break;
 
                 case GameState.events:
+
                     tempObj = inGame.ToList();
                     miniTempObj = events.ToList();
 
@@ -295,9 +334,25 @@ namespace _1YearProject
                     break;
                 case GameState.inGame:
                     level.Draw(spriteBatch);
+
                     foreach (GameObject obj in tempObj)
                     {
                         obj.Draw(spriteBatch);
+                    }
+
+                    if (Tower.towerClicked == false)
+                    {
+                        foreach (GameObject go in towerBuilder)
+                        {
+                            go.Draw(spriteBatch);
+                        }
+                    }
+                    else
+                    {
+                        foreach (GameObject go in upgMenu)
+                        {
+                            go.Draw(spriteBatch);
+                        }
                     }
                     waveManager.Draw(spriteBatch);
                     
@@ -348,6 +403,8 @@ namespace _1YearProject
             
 
         }
+
+
 
 
     }

@@ -19,6 +19,9 @@ namespace _1YearProject.TowerDefense
         private Animator animator;
         private Collider collider;
 
+
+        public bool canBuild { get; set; }
+
         public MouseCursor(GameObject gameObject) : base(gameObject)
         {
             transform = gameObject.GetTransform;
@@ -43,6 +46,7 @@ namespace _1YearProject.TowerDefense
 
             transform.Position = new Vector2(Mouse.GetState().X - 16, Mouse.GetState().Y - 16);
 
+
         }
 
         public void LoadContent(ContentManager content)
@@ -57,5 +61,7 @@ namespace _1YearProject.TowerDefense
             animator.CreateAnimation("static", new Animation(1, 0, 0, 32, 32, 6, Vector2.Zero));
             animator.PlayAnimation("static");
         }
+
+
     }
 }

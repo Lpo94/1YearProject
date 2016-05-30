@@ -21,11 +21,16 @@ namespace _1YearProject.TowerDefense
         private float liveTime = 500;
         private Transform transform;
         private Animator animator;
-        private Collider collider;
+
+
+        private GameObject enemy;
+        private Transform enemyTransform;
 
 
         public TowerShot(GameObject gameObject, float dmg, float speed, Vector2 pos, GameObject enemy) : base(gameObject)
         {
+            this.enemy = enemy;
+            enemyTransform = enemy.GetTransform;
             this.dmg = dmg;
             this.speed = speed;
             transform = gameObject.GetTransform;
@@ -34,15 +39,15 @@ namespace _1YearProject.TowerDefense
 
         public void LoadContent(ContentManager content)
         {
-            this.collider = (Collider)gameObject.GetComponent("Collider");
             this.animator = (Animator)gameObject.GetComponent("Animator");
             CreateAnimations();
         }
 
         public void Update()
         {
-            Vector2 dir = transform.Position - new Vector2(500, 500);
+            Vector2 dir = transform.Position - enemyTransform.Position;
             dir.Normalize();
+
             if (liveTime <= 0)
             {
                 GameWorld.Instance.removeObjects.Add(gameObject);
@@ -50,7 +55,7 @@ namespace _1YearProject.TowerDefense
             else
                 liveTime -= GameWorld.Instance.deltaTime;
 
-            gameObject.GetTransform.Translate(dir * speed * GameWorld.Instance.deltaTime);
+            gameObject.GetTransform.Translate(-dir * speed * GameWorld.Instance.deltaTime);
         }
 
         public void CreateAnimations()

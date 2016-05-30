@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using _1YearProject.Components;
 using _1YearProject.Interfaces;
 using _1YearProject.UI;
+using _1YearProject.Builder;
 using _1YearProject.TowerDefense;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -29,18 +30,23 @@ namespace _1YearProject
         }
         private List<GameObject> myTargets;
         private GameObject tar;
+
         public float upgSpeed { get; set; }
         public bool Clicked { get; set; }
         public float Dmg { get; set; }
         public float atkSpeed { get; set; }
         private float myAttackSpeed;
+
         public float Range { get; set; }
         public string Type { get; set; }
         public int Price { get; set; }
+
         private SpriteFont font;
 
         public static bool towerClicked = false;
         private bool clicked = false;
+
+        private Director bulletDirector = new Director(new BulletBuilder());
 
 
         public Tower(GameObject gameObject, string type, Vector2 pos) : base(gameObject)
@@ -77,7 +83,7 @@ namespace _1YearProject
 
             foreach(GameObject go in GameWorld.Instance.tempObj)
             {
-                if (go.CheckComponent("TowerIcon") == true)
+                if (go.CheckComponent("Player") == true)
                 {
                     if (Vector2.Distance(go.GetTransform.Position, transform.Position) < Range)
             {
@@ -91,7 +97,11 @@ namespace _1YearProject
                 upgDMG = false;
             }
             myTargets.Sort();
-            Shoot(tar);
+
+            if (myTargets.Count != 0)
+            {
+                Shoot(myTargets[0]);
+            }
         }
 
         public void LoadContent(ContentManager content)
@@ -120,7 +130,7 @@ namespace _1YearProject
         {
             if (atkSpeed <= 0)
             {
-                GameWorld.Instance.CreateBullet(new Vector2(transform.Position.X + 9, transform.Position.Y), 0.5f, 1, tar);
+                CreateBullet(new Vector2(transform.Position.X + 9, transform.Position.Y), 0.5f, 1, tar);
                 atkSpeed = myAttackSpeed;
             }
             else
@@ -134,6 +144,17 @@ namespace _1YearProject
                 Dmg += 2;
                 Mainbuilding.Gold -= Price;
             }
+        }
+
+        internal void CreateBullet(Vector2 pos, float speed, float dmg, GameObject enemy)
+        {
+
+            bulletDirector.Construct(pos, speed, dmg, enemy);
+            GameObject bullet = bulletDirector.GetGameObject();
+            bullet.LoadContent(GameWorld.Instance.Content);            
+            GameWorld.Instance.inGame.Add(bullet);
+
+
         }
     }
 }
