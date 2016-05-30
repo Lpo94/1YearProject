@@ -17,7 +17,7 @@ namespace _1YearProject.Components
         private Texture2D texture2D;
         private bool doCollisionChecks;
         private Animator animator;
-        private List<Collider> otherColliders = new List<Collider>();
+        internal List<Collider> otherColliders = new List<Collider>();
         private Dictionary<string, Color[][]> pixels;
         public Color[] textureData;
 

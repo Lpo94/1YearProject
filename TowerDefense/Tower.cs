@@ -81,12 +81,12 @@ namespace _1YearProject
                 towerClicked = false;
             }
 
-            foreach(GameObject go in GameWorld.Instance.tempObj)
+            foreach (GameObject go in GameWorld.Instance.tempObj)
             {
                 if (go.CheckComponent("Player") == true)
                 {
                     if (Vector2.Distance(go.GetTransform.Position, transform.Position) < Range)
-            {
+                    {
                         myTargets.Add(go);
                     }
                 }
@@ -105,7 +105,7 @@ namespace _1YearProject
         }
 
         public void LoadContent(ContentManager content)
-        {            
+        {
             font = content.Load<SpriteFont>("font");
             this.collider = (Collider)gameObject.GetComponent("Collider");
             this.animator = (Animator)gameObject.GetComponent("Animator");
@@ -122,7 +122,7 @@ namespace _1YearProject
         {
             if (clicked == true)
             {
-                spriteBatch.DrawString(font, "Attack DMG " + Dmg + "\n Attack Speed " + myAttackSpeed/1000 + "\n Range " + Range, new Vector2(50, 650), Color.Pink);
+                spriteBatch.DrawString(font, "Attack DMG " + Dmg + "\n Attack Speed " + myAttackSpeed / 1000 + "\n Range " + Range, new Vector2(50, 650), Color.Pink);
             }
         }
 
@@ -139,7 +139,7 @@ namespace _1YearProject
 
         public void UPGDamage()
         {
-            if(Mainbuilding.Gold >= 10)
+            if (Mainbuilding.Gold >= 10)
             {
                 Dmg += 2;
                 Mainbuilding.Gold -= 10;
@@ -151,7 +151,7 @@ namespace _1YearProject
 
             bulletDirector.Construct(pos, speed, dmg, enemy);
             GameObject bullet = bulletDirector.GetGameObject();
-            bullet.LoadContent(GameWorld.Instance.Content);            
+            bullet.LoadContent(GameWorld.Instance.Content);
             GameWorld.Instance.inGame.Add(bullet);
 
 

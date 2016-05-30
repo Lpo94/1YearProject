@@ -55,6 +55,11 @@ namespace _1YearProject.TowerDefense
             else
                 liveTime -= GameWorld.Instance.deltaTime;
 
+            if (200 > transform.Position.Y || 4000 < transform.Position.Y || 200 > transform.Position.X || 4000 < transform.Position.X)
+            {
+                GameWorld.Instance.removeObjects.Add(gameObject);
+            }
+
             gameObject.GetTransform.Translate(-dir * speed * GameWorld.Instance.deltaTime);
         }
 
