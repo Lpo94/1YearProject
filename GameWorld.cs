@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using _1YearProject.Components;
+using System.Data.SQLite;
 using _1YearProject.Builder;
 using _1YearProject.TowerDefense;
 
@@ -41,7 +43,6 @@ namespace _1YearProject
         public bool canBuild;
         DB db = new DB();
 
-
         WaveManager waveManager;
         Level level = new Level();
         Texture2D enemyTexture;
@@ -66,7 +67,6 @@ namespace _1YearProject
                 return instance;
             }
         }
-
         private GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -75,7 +75,6 @@ namespace _1YearProject
             graphics.PreferredBackBufferWidth = 1400;
             IsMouseVisible = true;
         }
-
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -169,7 +168,6 @@ namespace _1YearProject
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
 
             foreach (GameObject go in gameObjects)
             {
@@ -392,7 +390,6 @@ namespace _1YearProject
             base.Draw(gameTime);
             
         }
-
         internal void BuildTower(Vector2 pos)
         {
             if (canBuild == true && Mainbuilding.Gold >= 10)
