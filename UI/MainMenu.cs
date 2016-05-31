@@ -13,13 +13,13 @@ namespace _1YearProject
 {
     class MainMenu : Component, ILoad, IDraw, IUpdate
     {
-        private static List<GUIElement> main = new List<GUIElement>();
-        private static List<GUIElement> login = new List<GUIElement>();
-        private static List<GUIElement> howTo = new List<GUIElement>();
-        private static List<GUIElement> highscore = new List<GUIElement>();
-        private static List<GUIElement> inGame = new List<GUIElement>();
-        private static List<GUIElement> events = new List<GUIElement>();
-        private static List<GUIElement> pause = new List<GUIElement>();
+        private  List<GUIElement> main = new List<GUIElement>();
+        private  List<GUIElement> login = new List<GUIElement>();
+        private  List<GUIElement> howTo = new List<GUIElement>();
+        private  List<GUIElement> highscore = new List<GUIElement>();
+        private  List<GUIElement> inGame = new List<GUIElement>();
+        private  List<GUIElement> events = new List<GUIElement>();
+        private  List<GUIElement> pause = new List<GUIElement>();
         static MainMenu instance;
 
         private static GameState gameState;

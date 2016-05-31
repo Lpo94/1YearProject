@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework;
 
 namespace _1YearProject
 {
-    class UpgradeIcon : Component, IUpdate, ILoad
+    class UpgradeDmgIcon : Component, IUpdate, ILoad
     {
         private Transform transform;
         private Collider collider;
@@ -21,10 +21,7 @@ namespace _1YearProject
         private float upgradeTime = 150;
         
 
-        public static bool Clicked { get; set; }
-
-
-        public UpgradeIcon(GameObject gameObject, Vector2 pos) : base(gameObject)
+        public UpgradeDmgIcon(GameObject gameObject, Vector2 pos) : base(gameObject)
         {
             transform = gameObject.GetTransform;
             transform.Position = pos;
@@ -44,14 +41,10 @@ namespace _1YearProject
             {
                 if (collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
                 {
-                    Clicked = true;
                     Tower.UpgDMG = true;
                     upgradeTime = 150;
                 }
-                else if (!collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
-                {
-                    Clicked = false;
-                }
+
             }
             else
                 upgradeTime -= GameWorld.Instance.deltaTime;

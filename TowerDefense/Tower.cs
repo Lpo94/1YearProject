@@ -31,7 +31,6 @@ namespace _1YearProject
         private List<GameObject> myTargets;
         private GameObject tar;
 
-        public float upgSpeed { get; set; }
         public bool Clicked { get; set; }
         public float Dmg { get; set; }
         public float atkSpeed { get; set; }
@@ -70,16 +69,7 @@ namespace _1YearProject
 
         public void Update()
         {
-            if (collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                clicked = true;
-                towerClicked = true;
-            }
-            else if (!collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                clicked = false;
-                towerClicked = false;
-            }
+            
 
             foreach (GameObject go in GameWorld.Instance.tempObj)
             {
@@ -91,7 +81,7 @@ namespace _1YearProject
                     }
                 }
             }
-            if (upgDMG == true && upgSpeed <= 0)
+            if (upgDMG == true)
             {
                 UPGDamage();
                 upgDMG = false;
@@ -101,6 +91,17 @@ namespace _1YearProject
             if (myTargets.Count != 0)
             {
                 Shoot(myTargets[0]);
+            }
+
+            if (collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                clicked = true;
+                towerClicked = true;
+            }
+            else if (!collider.CollisionBox.Contains(new Point(Mouse.GetState().X, Mouse.GetState().Y)) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                clicked = false;
+                towerClicked = false;
             }
         }
 

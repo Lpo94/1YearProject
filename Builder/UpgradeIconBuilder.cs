@@ -23,7 +23,7 @@ namespace _1YearProject
         {
             gameObject = new GameObject();
             gameObject.AddComponent(new SpriteRenderer(gameObject, "textbox", 1, position));
-            gameObject.AddComponent(new UpgradeIcon(gameObject, position));
+            gameObject.AddComponent(new UpgradeDmgIcon(gameObject, position));
             gameObject.AddComponent(new Animator(gameObject));
             gameObject.AddComponent(new Collider(gameObject));
 
