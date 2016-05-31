@@ -10,13 +10,13 @@ namespace _1YearProject
 {
     class DB
     {
-        public void db()
+        public DB()
         {
             {
-                SQLiteConnection.CreateFile("1YearProject.db");
+                SQLiteConnection.CreateFile("YearProject.db");
                 SQLiteConnection dbConn = new
-                SQLiteConnection("Data Source=1YearProject.db;Version=3;");
-                String connStr = "Data Source=ny.db;Version=3";
+                SQLiteConnection("Data Source=YearProject.db;Version=3;");
+                String connStr = "Data Source=YearProject.db;Version=3";
                 SQLiteConnection conn = new SQLiteConnection(connStr);
                 dbConn.Open();
                 String sql = "create table highscores (name varchar(20), score int)";
