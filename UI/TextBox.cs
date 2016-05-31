@@ -24,7 +24,6 @@ namespace _1YearProject.UI
         private string myText = "";
         private bool clicked;
         private SpriteFont font;
-        private List<string> myTextList;
         private float delay = 500;
         float timer = GameWorld.Instance.deltaTime;
 
@@ -51,7 +50,7 @@ namespace _1YearProject.UI
             textBox = new Rectangle((int)pos.X, (int)pos.Y, (int)length, (int)height);
             notClickedTex = content.Load<Texture2D>("Textbox");
             clickedTex = content.Load<Texture2D>("Textboxtar");
-            myTextList = new List<string>();
+
 
         }
 

@@ -22,14 +22,11 @@ namespace _1YearProject.TowerDefense
         private Transform transform;
         private Animator animator;
 
-
-        private GameObject enemy;
         private Transform enemyTransform;
 
 
         public TowerShot(GameObject gameObject, float dmg, float speed, Vector2 pos, GameObject enemy) : base(gameObject)
         {
-            this.enemy = enemy;
             enemyTransform = enemy.GetTransform;
             this.dmg = dmg;
             this.speed = speed;
@@ -51,6 +48,7 @@ namespace _1YearProject.TowerDefense
             if (liveTime <= 0)
             {
                 GameWorld.Instance.removeObjects.Add(gameObject);
+
             }
             else
                 liveTime -= GameWorld.Instance.deltaTime;
@@ -59,13 +57,12 @@ namespace _1YearProject.TowerDefense
             {
                 GameWorld.Instance.removeObjects.Add(gameObject);
             }
-
             gameObject.GetTransform.Translate(-dir * speed * GameWorld.Instance.deltaTime);
         }
 
         public void CreateAnimations()
         {
-            animator.CreateAnimation("static", new Animation(1, 0, 0, 16, 16, 6, Vector2.Zero));
+            animator.CreateAnimation("static", new Animation(1, 0, 0, 6, 6, 6, Vector2.Zero));
             animator.PlayAnimation("static");
         }
 

@@ -30,7 +30,7 @@ namespace _1YearProject.Components
         {
             doCollisionChecks = true;
 
-            GameWorld.colliders.Add(this);
+            GameWorld.Instance.colliders.Add(this);
         }
 
         public void Update()
@@ -71,29 +71,34 @@ namespace _1YearProject.Components
 
         }
 
-        public void SetDoCollisionChecks()
-        {
-
-        }
-
         private void CheckCollision()
         {
             if (doCollisionChecks)
             {
-                foreach (Collider other in GameWorld.colliders)
+                foreach (Collider other in GameWorld.Instance.colliders)
                 {
-                    if (other != this)
+                    if (other.gameObject.CheckComponent("TowerShot") == true &&
+                        gameObject.CheckComponent("TowerShot") == true)
                     {
-                        if (CollisionBox.Intersects(other.CollisionBox))
-                        {
-                            gameObject.OnCollisionEnter(other);
-                            otherColliders.Add(other);
 
-                        }
-                        else if (!CollisionBox.Intersects(other.CollisionBox))
+                    }
+                    else
+                    {
+
+                        if (other != this)
                         {
-                            gameObject.OnCollisionExit(other);
-                            otherColliders.Remove(other);
+
+                            if (CollisionBox.Intersects(other.CollisionBox))
+                            {
+                                gameObject.OnCollisionEnter(other);
+                                otherColliders.Add(other);
+
+                            }
+                            else if (!CollisionBox.Intersects(other.CollisionBox))
+                            {
+                                gameObject.OnCollisionExit(other);
+                                otherColliders.Remove(other);
+                            }
                         }
                     }
                 }

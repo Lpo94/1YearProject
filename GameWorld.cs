@@ -52,7 +52,7 @@ namespace _1YearProject
             set { graphics = value; }
         }
 
-        internal static List<Collider> colliders = new List<Collider>();
+        internal List<Collider> colliders = new List<Collider>();
 
 
         public static GameWorld Instance
@@ -86,7 +86,7 @@ namespace _1YearProject
         {
             // TODO: Add your initialization logic here
 
-            
+           
             Director director = new Director(new TextBoxBuilder());
             director.Construct(new Vector2 (545, 335),0,0,null);
             GameObject textBox1 = director.GetGameObject();
@@ -226,6 +226,10 @@ namespace _1YearProject
 
             foreach (GameObject go in removeObjects)
             {
+                if (go.CheckComponent("Collider") == true)
+                {
+                    colliders.Remove((Collider) go.GetComponent("Collider"));
+                }
                 inGame.Remove(go);
                 events.Remove(go);
             }
@@ -272,11 +276,6 @@ namespace _1YearProject
 
                     tempObj = inGame.ToList();
 
-                    foreach (GameObject obj in tempObj)
-                    {
-                        obj.Update();
-                    }
-
                     if (Tower.towerClicked == false)
                     {
                         foreach (GameObject go in towerBuilder)
@@ -291,6 +290,12 @@ namespace _1YearProject
                             go.Update();
                         }
                     }
+
+                    foreach (GameObject obj in tempObj)
+                    {
+                        obj.Update();
+                    }
+
                     waveManager.Update(gameTime);
                     break;
 

@@ -23,7 +23,7 @@ namespace _1YearProject
         private Vector2 startPos = Vector2.Zero;
         private SpriteFont font;
         public static int health = 75;
-        private static int gold = 110;
+        private static int gold = 5000;
 
         public static int Gold
         {
@@ -42,8 +42,9 @@ namespace _1YearProject
         public void LoadContent(ContentManager content)
         {
             font = content.Load<SpriteFont>("font");
-            this.collider = (Collider)gameObject.GetComponent("Collider");
-            this.animator = (Animator)gameObject.GetComponent("Animator");
+            collider = (Collider)gameObject.GetComponent("Collider");
+            animator = (Animator)gameObject.GetComponent("Animator");
+            spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
             CreateAnimations();
         }
         public void Draw(SpriteBatch spriteBatch)
@@ -53,14 +54,15 @@ namespace _1YearProject
         }
         public void OnCollisionEnter(Collider other)
         {
-            spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
-            spriteRenderer.Color = Color.Blue;
-            health -= 1;
+            if (other.gameObject.CheckComponent("enemy") == true)
+            {
+                spriteRenderer.Color = Color.Blue;
+                health -= 1;
+            }
         }
 
         public void OnCollisionExit(Collider other)
         {
-            spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
             spriteRenderer.Color = Color.White;
         }
         public void CreateAnimations()

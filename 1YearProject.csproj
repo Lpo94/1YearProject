@@ -89,7 +89,7 @@
     <Compile Include="UI\TextBox.cs" />
     <Compile Include="TowerDefense\Wave.cs" />
     <Compile Include="TowerDefense\WaveManager.cs" />
-    <Compile Include="TowerDefense\UpgradeIcon.cs" />
+    <Compile Include="TowerDefense\UpgradeDmgIcon.cs" />
     <Compile Include="Builder\UpgradeIconBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
