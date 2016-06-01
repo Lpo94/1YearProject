@@ -5,15 +5,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.IO;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace _1YearProject
 {
     class DB
     {
+        internal string username { get; set; }
+        internal string password { get; set; }
+        public static DB instance;
 
-        public DB()
+        public void CreateUser()
+        {
+        }
+        public void Login()
+        {
+
+        }
+
+        private DB()
         {
             CreateDatabase();
+        }
+        public static DB Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new DB();
+                }
+                return instance;
+            }
         }
         private void Sqlcommannd(object c)
         {
